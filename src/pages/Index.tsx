@@ -18,7 +18,8 @@ import {
   Book, 
   Youtube, 
   HelpCircle, 
-  Award 
+  Award,
+  ArrowRight
 } from 'lucide-react';
 import { toast } from '@/hooks/use-toast';
 import {
@@ -233,7 +234,7 @@ const Index = () => {
             icon={<Book className="h-5 w-5 text-green-500" />}
             creditAmount={8}
             description="Share your experience using Zebracat in a blog post or article. Tell your readers how it's improved your workflow or helped solve specific problems."
-            proTip="Include screenshots, use cases, and step-by-step guides on how to use Zebracat for best results. Don't forget to include your affiliate link if you have one for extra benefits!"
+            proTip="Add screenshots, use cases, and step-by-step guides for better results. Mention Zebracat early in your article and include a link using natural wording (e.g., I used this AI video tool to create my latest project)."
             tipBackgroundColor="bg-green-50"
             tipTextColor="text-green-800"
             tipBorderColor="border-green-100"
