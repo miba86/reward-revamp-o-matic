@@ -22,9 +22,9 @@ const VideoPlatformCard: React.FC<VideoPlatformCardProps> = ({ icon, name, onCli
             className="w-12 h-12 object-contain transition-transform group-hover:scale-110" 
           />
         ) : (
-          React.cloneElement(icon as React.ReactElement, {
-            className: "w-12 h-12 transition-transform group-hover:scale-110"
-          })
+          <div className="transition-transform group-hover:scale-110">
+            {icon}
+          </div>
         )}
       </div>
       <div className="flex items-center mt-1">

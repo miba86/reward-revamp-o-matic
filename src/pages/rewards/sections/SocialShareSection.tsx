@@ -2,6 +2,7 @@
 import React from 'react';
 import RewardSection from '../../../components/RewardSection';
 import SocialShareCard from '../../../components/SocialShareCard';
+import { Youtube } from 'lucide-react';
 
 // Social platform logos
 const SOCIAL_LOGOS: Record<string, string> = {
@@ -9,8 +10,7 @@ const SOCIAL_LOGOS: Record<string, string> = {
   instagram: "https://cdn.worldvectorlogo.com/logos/instagram-2016-5.svg",
   linkedin: "https://cdn.worldvectorlogo.com/logos/linkedin-icon-2.svg",
   tiktok: "https://cdn.worldvectorlogo.com/logos/tiktok-1.svg",
-  facebook: "https://cdn.worldvectorlogo.com/logos/facebook-3-2.svg",
-  youtube: "https://cdn.worldvectorlogo.com/logos/youtube-icon.svg"
+  facebook: "https://cdn.worldvectorlogo.com/logos/facebook-3-2.svg"
 };
 
 interface SocialShareSectionProps {
@@ -35,7 +35,7 @@ const SocialShareSection: React.FC<SocialShareSectionProps> = ({ openDialog, ico
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
         <SocialShareCard 
           name="YouTube" 
-          logo={SOCIAL_LOGOS.youtube}
+          logo={<Youtube className="w-12 h-12 text-red-500" />}
           tagName="zebracat_app"
           onClick={() => window.open('https://youtube.com/upload', '_blank')}
         />

@@ -10,8 +10,7 @@ const SOCIAL_LOGOS: Record<string, string> = {
   instagram: "https://cdn.worldvectorlogo.com/logos/instagram-2016-5.svg",
   linkedin: "https://cdn.worldvectorlogo.com/logos/linkedin-icon-2.svg",
   tiktok: "https://cdn.worldvectorlogo.com/logos/tiktok-1.svg",
-  facebook: "https://cdn.worldvectorlogo.com/logos/facebook-3-2.svg",
-  youtube: "https://cdn.worldvectorlogo.com/logos/youtube-icon.svg"
+  facebook: "https://cdn.worldvectorlogo.com/logos/facebook-3-2.svg"
 };
 
 interface VideoSectionProps {
