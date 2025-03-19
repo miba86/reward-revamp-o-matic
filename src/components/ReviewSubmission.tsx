@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { Upload, Check } from 'lucide-react';
 
 interface ReviewSubmissionProps {
-  type: 'review' | 'social';
+  type: 'review' | 'social' | 'blog' | 'video' | 'qa';
   onSubmit: (data: FormData) => void;
 }
 
@@ -13,22 +13,44 @@ const ReviewSubmission: React.FC<ReviewSubmissionProps> = ({ type, onSubmit }) =
   const [file, setFile] = useState<File | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const platforms = type === 'review' 
-    ? [
-        { value: 'g2', label: 'G2 Crowd' },
-        { value: 'trustpilot', label: 'Trustpilot' },
-        { value: 'capterra', label: 'Capterra' },
-        { value: 'google', label: 'Google' },
-        { value: 'producthunt', label: 'Product Hunt' },
-        { value: 'trustradius', label: 'Trust Radius' }
-      ]
-    : [
-        { value: 'twitter', label: 'Twitter' },
-        { value: 'instagram', label: 'Instagram' },
-        { value: 'linkedin', label: 'LinkedIn' },
-        { value: 'tiktok', label: 'TikTok' },
-        { value: 'facebook', label: 'Facebook' }
-      ];
+  // Define platforms for each type
+  const platformOptions = {
+    review: [
+      { value: 'g2', label: 'G2 Crowd' },
+      { value: 'trustpilot', label: 'Trustpilot' },
+      { value: 'capterra', label: 'Capterra' },
+      { value: 'google', label: 'Google' },
+      { value: 'producthunt', label: 'Product Hunt' },
+      { value: 'trustradius', label: 'Trust Radius' }
+    ],
+    social: [
+      { value: 'twitter', label: 'Twitter' },
+      { value: 'instagram', label: 'Instagram' },
+      { value: 'linkedin', label: 'LinkedIn' },
+      { value: 'tiktok', label: 'TikTok' },
+      { value: 'facebook', label: 'Facebook' }
+    ],
+    blog: [
+      { value: 'medium', label: 'Medium' },
+      { value: 'devto', label: 'Dev.to' },
+      { value: 'hashnode', label: 'Hashnode' },
+      { value: 'wordpress', label: 'WordPress' },
+      { value: 'other', label: 'Other Blog Platform' }
+    ],
+    video: [
+      { value: 'youtube', label: 'YouTube' },
+      { value: 'tiktok', label: 'TikTok' },
+      { value: 'other', label: 'Other Video Platform' }
+    ],
+    qa: [
+      { value: 'quora', label: 'Quora' },
+      { value: 'reddit', label: 'Reddit' },
+      { value: 'stackoverflow', label: 'Stack Overflow' },
+      { value: 'other', label: 'Other Q&A Platform' }
+    ]
+  };
+
+  const platforms = platformOptions[type];
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
@@ -61,14 +83,63 @@ const ReviewSubmission: React.FC<ReviewSubmissionProps> = ({ type, onSubmit }) =
     }, 1500);
   };
 
-  const linkPlaceholder = type === 'review' 
-    ? 'https://example.com/your-review' 
-    : 'https://example.com/your-social-post';
+  // Define placeholders and labels based on type
+  const getPlaceholderAndLabel = () => {
+    switch(type) {
+      case 'review':
+        return {
+          placeholder: 'https://example.com/your-review',
+          label: 'Review Link'
+        };
+      case 'social':
+        return {
+          placeholder: 'https://example.com/your-social-post',
+          label: 'Social Post Link'
+        };
+      case 'blog':
+        return {
+          placeholder: 'https://example.com/your-blog-post',
+          label: 'Blog Post Link'
+        };
+      case 'video':
+        return {
+          placeholder: 'https://example.com/your-video',
+          label: 'Video Link'
+        };
+      case 'qa':
+        return {
+          placeholder: 'https://example.com/your-answer',
+          label: 'Answer Link'
+        };
+      default:
+        return {
+          placeholder: 'https://example.com/',
+          label: 'Link'
+        };
+    }
+  };
 
-  const linkLabel = type === 'review' ? 'Review Link' : 'Social Post Link';
-  const submitButtonText = type === 'review' 
-    ? 'Submit Review for Verification'
-    : 'Submit Social Share for Verification';
+  const { placeholder, label } = getPlaceholderAndLabel();
+
+  // Define submission button text
+  const getSubmitButtonText = () => {
+    switch(type) {
+      case 'review':
+        return 'Submit Review for Verification';
+      case 'social':
+        return 'Submit Social Share for Verification';
+      case 'blog':
+        return 'Submit Blog Post for Verification';
+      case 'video':
+        return 'Submit Video Tutorial for Verification';
+      case 'qa':
+        return 'Submit Q&A Answer for Verification';
+      default:
+        return 'Submit for Verification';
+    }
+  };
+
+  const submitButtonText = getSubmitButtonText();
 
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
@@ -80,7 +151,7 @@ const ReviewSubmission: React.FC<ReviewSubmissionProps> = ({ type, onSubmit }) =
           className="w-full px-3 py-2 bg-white border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-purple/20 focus:border-brand-purple transition-all"
           required
         >
-          <option value="" disabled>Select {type === 'review' ? 'Website' : 'Social Platform'}</option>
+          <option value="" disabled>Select {type === 'review' ? 'Website' : type === 'social' ? 'Social Platform' : type === 'blog' ? 'Blog Platform' : type === 'video' ? 'Video Platform' : 'Q&A Platform'}</option>
           {platforms.map(platform => (
             <option key={platform.value} value={platform.value}>{platform.label}</option>
           ))}
@@ -88,12 +159,12 @@ const ReviewSubmission: React.FC<ReviewSubmissionProps> = ({ type, onSubmit }) =
       </div>
 
       <div>
-        <label className="block text-sm font-medium text-gray-700 mb-1">{linkLabel}</label>
+        <label className="block text-sm font-medium text-gray-700 mb-1">{label}</label>
         <input
           type="url"
           value={link}
           onChange={(e) => setLink(e.target.value)}
-          placeholder={linkPlaceholder}
+          placeholder={placeholder}
           className="w-full px-3 py-2 bg-white border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-purple/20 focus:border-brand-purple transition-all"
           required
         />
