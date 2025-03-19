@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import Header from '../components/Header';
 import Sidebar from '../components/Sidebar';
@@ -30,7 +29,6 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 
-// Platform logos
 const PLATFORM_LOGOS: Record<string, string> = {
   g2: "https://cdn.worldvectorlogo.com/logos/g2crowd-1.svg",
   trustpilot: "https://cdn.worldvectorlogo.com/logos/trustpilot.svg",
@@ -40,7 +38,6 @@ const PLATFORM_LOGOS: Record<string, string> = {
   trustradius: "https://media.trustradius.com/logo/product/956a6b2b-3b30-491c-9fb7-d49e8c0bf0f2.png"
 };
 
-// Social platform logos
 const SOCIAL_LOGOS: Record<string, string> = {
   twitter: "https://cdn.worldvectorlogo.com/logos/twitter-6.svg",
   instagram: "https://cdn.worldvectorlogo.com/logos/instagram-2016-5.svg",
@@ -49,7 +46,6 @@ const SOCIAL_LOGOS: Record<string, string> = {
   facebook: "https://cdn.worldvectorlogo.com/logos/facebook-3-2.svg"
 };
 
-// Blog platform logos
 const BLOG_LOGOS: Record<string, string> = {
   medium: "https://cdn.worldvectorlogo.com/logos/medium-m-2.svg",
   devto: "https://cdn.worldvectorlogo.com/logos/devto.svg",
@@ -57,7 +53,6 @@ const BLOG_LOGOS: Record<string, string> = {
   wordpress: "https://cdn.worldvectorlogo.com/logos/wordpress-blue.svg"
 };
 
-// Q&A platform logos
 const QA_LOGOS: Record<string, string> = {
   quora: "https://cdn.worldvectorlogo.com/logos/quora-1.svg",
   reddit: "https://cdn.worldvectorlogo.com/logos/reddit-4.svg",
@@ -99,7 +94,6 @@ const Index = () => {
       className: "bg-green-50 border-green-200",
     });
 
-    // Close the appropriate dialog based on type
     if (type === 'review') {
       setReviewDialogOpen(false);
     } else if (type === 'social') {
@@ -133,7 +127,6 @@ const Index = () => {
             </p>
           </div>
           
-          {/* Option 1: Share videos on social media */}
           <RewardSection 
             number={1}
             title="Share Zebracat videos on social media"
@@ -180,7 +173,6 @@ const Index = () => {
             </div>
           </RewardSection>
           
-          {/* Option 2: Leave a review */}
           <RewardSection 
             number={2}
             title="Leave a review about Zebracat"
@@ -227,7 +219,6 @@ const Index = () => {
             </div>
           </RewardSection>
           
-          {/* Option 3: Write a Blog Post */}
           <RewardSection 
             number={3}
             title="Write a Blog Post or Medium Article About Zebracat"
@@ -264,10 +255,9 @@ const Index = () => {
             </div>
           </RewardSection>
           
-          {/* Option 4: Publishing Video Tutorials */}
           <RewardSection 
             number={4}
-            title="Publishing a YouTube Video or TikTok Tutorial About Zebracat"
+            title="Publishing a YouTube Video, TikTok, or IG Reels Tutorial About Zebracat"
             icon={<Youtube className="h-5 w-5 text-red-500" />}
             creditAmount={10}
             description="Create a tutorial video showing how to use Zebracat features. Video content is highly engaging and helps new users understand our product's value quickly."
@@ -277,7 +267,7 @@ const Index = () => {
             tipBorderColor="border-red-100"
             onSubmitClick={() => openDialog('video')}
           >
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               <VideoPlatformCard 
                 icon={<Youtube className="text-red-500" />} 
                 name="YouTube Tutorial"
@@ -288,10 +278,14 @@ const Index = () => {
                 name="TikTok Tutorial"
                 onClick={() => window.open('https://www.tiktok.com/upload', '_blank')}
               />
+              <VideoPlatformCard 
+                icon={SOCIAL_LOGOS.instagram} 
+                name="Instagram Reels"
+                onClick={() => window.open('https://www.instagram.com/reels/create/', '_blank')}
+              />
             </div>
           </RewardSection>
           
-          {/* Option 5: Answer Questions */}
           <RewardSection 
             number={5}
             title="Answer Quora/Reddit Questions About Zebracat"
@@ -323,12 +317,10 @@ const Index = () => {
             </div>
           </RewardSection>
           
-          {/* Your Submissions section */}
           <SubmissionsList submissions={submittedReviews} />
         </main>
       </div>
 
-      {/* Review Dialog */}
       <Dialog open={reviewDialogOpen} onOpenChange={setReviewDialogOpen}>
         <DialogContent className="sm:max-w-[600px]">
           <DialogHeader>
@@ -343,7 +335,6 @@ const Index = () => {
         </DialogContent>
       </Dialog>
 
-      {/* Social Share Dialog */}
       <Dialog open={socialDialogOpen} onOpenChange={setSocialDialogOpen}>
         <DialogContent className="sm:max-w-[600px]">
           <DialogHeader>
@@ -358,7 +349,6 @@ const Index = () => {
         </DialogContent>
       </Dialog>
 
-      {/* Blog Post Dialog */}
       <Dialog open={blogDialogOpen} onOpenChange={setBlogDialogOpen}>
         <DialogContent className="sm:max-w-[600px]">
           <DialogHeader>
@@ -373,7 +363,6 @@ const Index = () => {
         </DialogContent>
       </Dialog>
 
-      {/* Video Tutorial Dialog */}
       <Dialog open={videoDialogOpen} onOpenChange={setVideoDialogOpen}>
         <DialogContent className="sm:max-w-[600px]">
           <DialogHeader>
@@ -388,7 +377,6 @@ const Index = () => {
         </DialogContent>
       </Dialog>
 
-      {/* Q&A Dialog */}
       <Dialog open={qaDialogOpen} onOpenChange={setQaDialogOpen}>
         <DialogContent className="sm:max-w-[600px]">
           <DialogHeader>
