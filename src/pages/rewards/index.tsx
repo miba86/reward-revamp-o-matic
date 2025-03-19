@@ -59,9 +59,9 @@ const RewardsPage = () => {
         
         <main className="flex-1 px-8 py-6 max-w-5xl">
           <div className="mb-8">
-            <h1 className="text-3xl font-semibold mb-2 text-zebra-dark">Want to increase your credits?</h1>
+            <h1 className="text-3xl font-semibold mb-2 text-zebra-dark">Want to create videos for free?</h1>
             <p className="text-gray-600 max-w-3xl">
-              Help us grow and we'll return the favor! You can now earn credits by completing simple tasks which help us spread the word and find new users. Your support means a lot, and we're grateful to offer rewards as a thank you.
+              Help us grow and we'll return the favour! You can now earn credits by completing simple tasks which help us spread the word and find new users. Please follow instructions and tips carefully to claim your rewards.
             </p>
           </div>
           
