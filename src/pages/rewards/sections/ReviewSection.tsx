@@ -25,7 +25,7 @@ const ReviewSection: React.FC<ReviewSectionProps> = ({ openDialog, icon }) => {
       title="Leave a review about Zebracat"
       icon={icon}
       creditAmount={5}
-      description="Your honest feedback helps us improve and helps others discover Zebracat. Leave a review on any platform below to earn credits!"
+      description="Your honest feedback helps us improve and helps others discover Zebracat. Leave a review of at least 50 words on any platform below to earn credits!"
       proTip="Include specific features you love and how Zebracat has helped your workflow for the most impactful reviews. Screenshots of your experience with the app are highly appreciated!"
       tipBackgroundColor="bg-amber-50"
       tipTextColor="text-amber-800"
