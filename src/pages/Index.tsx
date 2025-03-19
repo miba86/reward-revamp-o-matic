@@ -1,13 +1,26 @@
+
 import React, { useState } from 'react';
 import Header from '../components/Header';
 import Sidebar from '../components/Sidebar';
-import CreditCounter from '../components/CreditCounter';
 import RewardCard from '../components/RewardCard';
 import SocialShareCard from '../components/SocialShareCard';
 import ReviewSubmission from '../components/ReviewSubmission';
-import { Check, Award, Sparkles, Share2, Send, Book, Youtube, MessageSquare, HelpCircle, ArrowRight } from 'lucide-react';
+import VideoPlatformCard from '../components/VideoPlatformCard';
+import RewardSection from '../components/RewardSection';
+import SubmissionsList from '../components/SubmissionsList';
+import { useRewardDialogs } from '../hooks/use-reward-dialogs';
+import { Review, RewardType } from '../types/reward';
+import { 
+  Check, 
+  Share2, 
+  Sparkles, 
+  Send, 
+  Book, 
+  Youtube, 
+  HelpCircle, 
+  Award 
+} from 'lucide-react';
 import { toast } from '@/hooks/use-toast';
-import { Button } from '@/components/ui/button';
 import {
   Dialog,
   DialogContent,
@@ -51,16 +64,24 @@ const QA_LOGOS: Record<string, string> = {
 };
 
 const Index = () => {
-  const [submittedReviews, setSubmittedReviews] = useState<any[]>([]);
-  const [reviewDialogOpen, setReviewDialogOpen] = useState(false);
-  const [socialDialogOpen, setSocialDialogOpen] = useState(false);
-  const [blogDialogOpen, setBlogDialogOpen] = useState(false);
-  const [videoDialogOpen, setVideoDialogOpen] = useState(false);
-  const [qaDialogOpen, setQaDialogOpen] = useState(false);
+  const [submittedReviews, setSubmittedReviews] = useState<Review[]>([]);
+  const {
+    reviewDialogOpen,
+    socialDialogOpen,
+    blogDialogOpen,
+    videoDialogOpen,
+    qaDialogOpen,
+    setReviewDialogOpen,
+    setSocialDialogOpen,
+    setBlogDialogOpen,
+    setVideoDialogOpen,
+    setQaDialogOpen,
+    openDialog
+  } = useRewardDialogs();
   
   const handleSubmit = (formData: FormData) => {
-    const type = formData.get('type') as string;
-    const review = {
+    const type = formData.get('type') as RewardType;
+    const review: Review = {
       id: Date.now(),
       platform: formData.get('platform') as string,
       link: formData.get('link') as string,
@@ -112,25 +133,18 @@ const Index = () => {
           </div>
           
           {/* Option 1: Share videos on social media */}
-          <div className="bg-white rounded-xl p-6 border border-gray-100 shadow-soft mb-8">
-            <div className="mb-4 flex items-center">
-              <div className="step-number">1</div>
-              <h2 className="text-xl font-medium flex items-center">
-                Share Zebracat videos on social media
-                <span className="ml-2 inline-flex animate-float">
-                  <Share2 className="h-5 w-5 text-blue-400" />
-                </span>
-              </h2>
-            </div>
-            
-            <div className="mb-6">
-              <CreditCounter earningAmount={3} />
-            </div>
-            
-            <p className="text-gray-600 mb-5">
-              Share videos created with Zebracat on your social accounts and tag us. We'll reward you with credits for helping spread the word!
-            </p>
-            
+          <RewardSection 
+            number={1}
+            title="Share Zebracat videos on social media"
+            icon={<Share2 className="h-5 w-5 text-blue-400" />}
+            creditAmount={3}
+            description="Share videos created with Zebracat on your social accounts and tag us. We'll reward you with credits for helping spread the word!"
+            proTip="Make sure to tag Zebracat in your posts and add a link to our website for easy verification. Once shared, submit the link to your post below to claim your credits!"
+            tipBackgroundColor="bg-blue-50"
+            tipTextColor="text-blue-800"
+            tipBorderColor="border-blue-100"
+            onSubmitClick={() => openDialog('social')}
+          >
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
               <SocialShareCard 
                 name="Twitter" 
@@ -163,43 +177,21 @@ const Index = () => {
                 onClick={() => window.open('https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fzebracat.io', '_blank')}
               />
             </div>
-            
-            <div className="mt-6 p-4 bg-blue-50 rounded-lg border border-blue-100">
-              <p className="text-sm text-blue-800">
-                <strong>Pro tip:</strong> Make sure to tag Zebracat in your posts and add a link to our website for easy verification. Once shared, submit the link to your post below to claim your credits!
-              </p>
-            </div>
-            
-            <div className="mt-6 flex justify-center">
-              <Button 
-                onClick={() => setSocialDialogOpen(true)}
-                className="rewards-button flex items-center gap-2"
-              >
-                Start submitting <Send className="h-4 w-4" />
-              </Button>
-            </div>
-          </div>
+          </RewardSection>
           
           {/* Option 2: Leave a review */}
-          <div className="bg-white rounded-xl p-6 border border-gray-100 shadow-soft mb-8">
-            <div className="mb-4 flex items-center">
-              <div className="step-number">2</div>
-              <h2 className="text-xl font-medium flex items-center">
-                Leave a review about Zebracat
-                <span className="ml-2 inline-flex animate-float">
-                  <Sparkles className="h-5 w-5 text-amber-400" />
-                </span>
-              </h2>
-            </div>
-            
-            <div className="mb-6">
-              <CreditCounter earningAmount={5} />
-            </div>
-            
-            <p className="text-gray-600 mb-5">
-              Your honest feedback helps us improve and helps others discover Zebracat. Leave a review on any platform below to earn credits!
-            </p>
-            
+          <RewardSection 
+            number={2}
+            title="Leave a review about Zebracat"
+            icon={<Sparkles className="h-5 w-5 text-amber-400" />}
+            creditAmount={5}
+            description="Your honest feedback helps us improve and helps others discover Zebracat. Leave a review on any platform below to earn credits!"
+            proTip="Include specific features you love and how Zebracat has helped your workflow for the most impactful reviews. Screenshots of your experience with the app are highly appreciated!"
+            tipBackgroundColor="bg-amber-50"
+            tipTextColor="text-amber-800"
+            tipBorderColor="border-amber-100"
+            onSubmitClick={() => openDialog('review')}
+          >
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
               <RewardCard 
                 name="G2 Crowd" 
@@ -232,43 +224,21 @@ const Index = () => {
                 onClick={() => window.open('https://www.trustradius.com/products/zebracat/reviews', '_blank')}
               />
             </div>
-            
-            <div className="mt-6 p-4 bg-amber-50 rounded-lg border border-amber-100">
-              <p className="text-sm text-amber-800">
-                <strong>Pro tip:</strong> Include specific features you love and how Zebracat has helped your workflow for the most impactful reviews. Screenshots of your experience with the app are highly appreciated!
-              </p>
-            </div>
-            
-            <div className="mt-6 flex justify-center">
-              <Button 
-                onClick={() => setReviewDialogOpen(true)}
-                className="rewards-button flex items-center gap-2"
-              >
-                Start submitting <Send className="h-4 w-4" />
-              </Button>
-            </div>
-          </div>
+          </RewardSection>
           
           {/* Option 3: Write a Blog Post */}
-          <div className="bg-white rounded-xl p-6 border border-gray-100 shadow-soft mb-8">
-            <div className="mb-4 flex items-center">
-              <div className="step-number">3</div>
-              <h2 className="text-xl font-medium flex items-center">
-                Write a Blog Post or Medium Article About Zebracat
-                <span className="ml-2 inline-flex animate-float">
-                  <Book className="h-5 w-5 text-green-500" />
-                </span>
-              </h2>
-            </div>
-            
-            <div className="mb-6">
-              <CreditCounter earningAmount={8} />
-            </div>
-            
-            <p className="text-gray-600 mb-5">
-              Share your experience using Zebracat in a blog post or article. Tell your readers how it's improved your workflow or helped solve specific problems.
-            </p>
-            
+          <RewardSection 
+            number={3}
+            title="Write a Blog Post or Medium Article About Zebracat"
+            icon={<Book className="h-5 w-5 text-green-500" />}
+            creditAmount={8}
+            description="Share your experience using Zebracat in a blog post or article. Tell your readers how it's improved your workflow or helped solve specific problems."
+            proTip="Include screenshots, use cases, and step-by-step guides on how to use Zebracat for best results. Don't forget to include your affiliate link if you have one for extra benefits!"
+            tipBackgroundColor="bg-green-50"
+            tipTextColor="text-green-800"
+            tipBorderColor="border-green-100"
+            onSubmitClick={() => openDialog('blog')}
+          >
             <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4">
               <RewardCard 
                 name="Medium" 
@@ -291,110 +261,48 @@ const Index = () => {
                 onClick={() => window.open('https://wordpress.com/post', '_blank')}
               />
             </div>
-            
-            <div className="mt-6 p-4 bg-green-50 rounded-lg border border-green-100">
-              <p className="text-sm text-green-800">
-                <strong>Pro tip:</strong> Include screenshots, use cases, and step-by-step guides on how to use Zebracat for best results. Don't forget to include your affiliate link if you have one for extra benefits!
-              </p>
-            </div>
-            
-            <div className="mt-6 flex justify-center">
-              <Button 
-                onClick={() => setBlogDialogOpen(true)}
-                className="rewards-button flex items-center gap-2"
-              >
-                Start submitting <Send className="h-4 w-4" />
-              </Button>
-            </div>
-          </div>
+          </RewardSection>
           
           {/* Option 4: Publishing Video Tutorials */}
-          <div className="bg-white rounded-xl p-6 border border-gray-100 shadow-soft mb-8">
-            <div className="mb-4 flex items-center">
-              <div className="step-number">4</div>
-              <h2 className="text-xl font-medium flex items-center">
-                Publishing a YouTube Video or TikTok Tutorial About Zebracat
-                <span className="ml-2 inline-flex animate-float">
-                  <Youtube className="h-5 w-5 text-red-500" />
-                </span>
-              </h2>
-            </div>
-            
-            <div className="mb-6">
-              <CreditCounter earningAmount={10} />
-            </div>
-            
-            <p className="text-gray-600 mb-5">
-              Create a tutorial video showing how to use Zebracat features. Video content is highly engaging and helps new users understand our product's value quickly.
-            </p>
-            
+          <RewardSection 
+            number={4}
+            title="Publishing a YouTube Video or TikTok Tutorial About Zebracat"
+            icon={<Youtube className="h-5 w-5 text-red-500" />}
+            creditAmount={10}
+            description="Create a tutorial video showing how to use Zebracat features. Video content is highly engaging and helps new users understand our product's value quickly."
+            proTip="Keep videos under 5 minutes for better engagement. Focus on solving one specific problem or showcasing one feature in depth rather than trying to cover everything."
+            tipBackgroundColor="bg-red-50"
+            tipTextColor="text-red-800"
+            tipBorderColor="border-red-100"
+            onSubmitClick={() => openDialog('video')}
+          >
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div 
-                className="platform-card group cursor-pointer" 
+              <VideoPlatformCard 
+                icon={<Youtube className="text-red-500" />} 
+                name="YouTube Tutorial"
                 onClick={() => window.open('https://www.youtube.com/upload', '_blank')}
-              >
-                <div className="w-16 h-16 mb-3 flex items-center justify-center">
-                  <Youtube className="w-12 h-12 text-red-500 transition-transform group-hover:scale-110" />
-                </div>
-                <div className="flex items-center mt-1">
-                  <span className="text-sm font-medium mr-1">YouTube Tutorial</span>
-                  <ArrowRight className="h-4 w-4 opacity-0 transition-opacity group-hover:opacity-100 text-brand-purple" />
-                </div>
-              </div>
-              <div 
-                className="platform-card group cursor-pointer" 
+              />
+              <VideoPlatformCard 
+                icon={SOCIAL_LOGOS.tiktok} 
+                name="TikTok Tutorial"
                 onClick={() => window.open('https://www.tiktok.com/upload', '_blank')}
-              >
-                <div className="w-16 h-16 mb-3 flex items-center justify-center">
-                  <img 
-                    src={SOCIAL_LOGOS.tiktok} 
-                    alt="TikTok logo" 
-                    className="w-12 h-12 object-contain transition-transform group-hover:scale-110" 
-                  />
-                </div>
-                <div className="flex items-center mt-1">
-                  <span className="text-sm font-medium mr-1">TikTok Tutorial</span>
-                  <ArrowRight className="h-4 w-4 opacity-0 transition-opacity group-hover:opacity-100 text-brand-purple" />
-                </div>
-              </div>
+              />
             </div>
-            
-            <div className="mt-6 p-4 bg-red-50 rounded-lg border border-red-100">
-              <p className="text-sm text-red-800">
-                <strong>Pro tip:</strong> Keep videos under 5 minutes for better engagement. Focus on solving one specific problem or showcasing one feature in depth rather than trying to cover everything.
-              </p>
-            </div>
-            
-            <div className="mt-6 flex justify-center">
-              <Button 
-                onClick={() => setVideoDialogOpen(true)}
-                className="rewards-button flex items-center gap-2"
-              >
-                Start submitting <Send className="h-4 w-4" />
-              </Button>
-            </div>
-          </div>
+          </RewardSection>
           
           {/* Option 5: Answer Questions */}
-          <div className="bg-white rounded-xl p-6 border border-gray-100 shadow-soft mb-8">
-            <div className="mb-4 flex items-center">
-              <div className="step-number">5</div>
-              <h2 className="text-xl font-medium flex items-center">
-                Answer Quora/Reddit Questions About Zebracat
-                <span className="ml-2 inline-flex animate-float">
-                  <HelpCircle className="h-5 w-5 text-purple-500" />
-                </span>
-              </h2>
-            </div>
-            
-            <div className="mb-6">
-              <CreditCounter earningAmount={4} />
-            </div>
-            
-            <p className="text-gray-600 mb-5">
-              Help others by answering questions about Zebracat on popular platforms like Quora and Reddit. Share your expertise and guide new users to success.
-            </p>
-            
+          <RewardSection 
+            number={5}
+            title="Answer Quora/Reddit Questions About Zebracat"
+            icon={<HelpCircle className="h-5 w-5 text-purple-500" />}
+            creditAmount={4}
+            description="Help others by answering questions about Zebracat on popular platforms like Quora and Reddit. Share your expertise and guide new users to success."
+            proTip="Provide detailed answers with examples from your own experience. Adding screenshots or GIFs demonstrating how to use Zebracat makes your answers much more helpful and increases engagement."
+            tipBackgroundColor="bg-purple-50"
+            tipTextColor="text-purple-800"
+            tipBorderColor="border-purple-100"
+            onSubmitClick={() => openDialog('qa')}
+          >
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               <RewardCard 
                 name="Quora" 
@@ -412,93 +320,10 @@ const Index = () => {
                 onClick={() => window.open('https://stackoverflow.com/search?q=zebracat', '_blank')}
               />
             </div>
-            
-            <div className="mt-6 p-4 bg-purple-50 rounded-lg border border-purple-100">
-              <p className="text-sm text-purple-800">
-                <strong>Pro tip:</strong> Provide detailed answers with examples from your own experience. Adding screenshots or GIFs demonstrating how to use Zebracat makes your answers much more helpful and increases engagement.
-              </p>
-            </div>
-            
-            <div className="mt-6 flex justify-center">
-              <Button 
-                onClick={() => setQaDialogOpen(true)}
-                className="rewards-button flex items-center gap-2"
-              >
-                Start submitting <Send className="h-4 w-4" />
-              </Button>
-            </div>
-          </div>
+          </RewardSection>
           
           {/* Your Submissions section */}
-          {submittedReviews.length > 0 && (
-            <div className="bg-white rounded-xl p-6 border border-gray-100 shadow-soft mb-8">
-              <h3 className="text-lg font-medium mb-4 flex items-center">
-                Your Submissions
-                <span className="ml-2 inline-flex animate-float">
-                  <Award className="h-5 w-5 text-brand-purple" />
-                </span>
-              </h3>
-              <div className="space-y-3">
-                {submittedReviews.map((review) => {
-                  const isReview = review.type === 'review';
-                  const isVideo = review.type === 'video';
-                  const isBlog = review.type === 'blog';
-                  const isQA = review.type === 'qa';
-                  const isSocial = review.type === 'social';
-                  
-                  let logoSource: Record<string, string>;
-                  if (isReview) {
-                    logoSource = PLATFORM_LOGOS;
-                  } else if (isSocial) {
-                    logoSource = SOCIAL_LOGOS;
-                  } else if (isBlog) {
-                    logoSource = BLOG_LOGOS;
-                  } else if (isQA) {
-                    logoSource = QA_LOGOS;
-                  } else {
-                    logoSource = PLATFORM_LOGOS;
-                  }
-                  
-                  let typeLabel = '';
-                  if (isReview) typeLabel = 'Review';
-                  else if (isSocial) typeLabel = 'Share';
-                  else if (isBlog) typeLabel = 'Blog post';
-                  else if (isVideo) typeLabel = 'Video tutorial';
-                  else if (isQA) typeLabel = 'Q&A answer';
-                  
-                  return (
-                    <div 
-                      key={review.id} 
-                      className="p-4 border border-gray-100 rounded-lg bg-gray-50 flex items-center justify-between animate-fade-in"
-                    >
-                      <div className="flex items-center">
-                        <div className="h-10 w-10 mr-3 flex items-center justify-center">
-                          <img 
-                            src={logoSource[review.platform]} 
-                            alt={`${review.platform} logo`} 
-                            className="w-full h-full object-contain" 
-                          />
-                        </div>
-                        <div>
-                          <div className="font-medium">
-                            {review.platform.charAt(0).toUpperCase() + review.platform.slice(1)} {typeLabel}
-                          </div>
-                          <div className="text-sm text-gray-500 truncate max-w-xs">
-                            {review.link}
-                          </div>
-                        </div>
-                      </div>
-                      <div className="flex items-center">
-                        <span className="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-amber-100 text-amber-800">
-                          Pending verification
-                        </span>
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
-          )}
+          <SubmissionsList submissions={submittedReviews} />
         </main>
       </div>
 

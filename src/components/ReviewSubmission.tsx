@@ -1,9 +1,15 @@
 
 import React, { useState } from 'react';
 import { Upload, Check } from 'lucide-react';
+import { RewardType } from '../types/reward';
+
+interface PlatformOption {
+  value: string;
+  label: string;
+}
 
 interface ReviewSubmissionProps {
-  type: 'review' | 'social' | 'blog' | 'video' | 'qa';
+  type: RewardType;
   onSubmit: (data: FormData) => void;
 }
 
@@ -14,7 +20,7 @@ const ReviewSubmission: React.FC<ReviewSubmissionProps> = ({ type, onSubmit }) =
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   // Define platforms for each type
-  const platformOptions = {
+  const platformOptions: Record<RewardType, PlatformOption[]> = {
     review: [
       { value: 'g2', label: 'G2 Crowd' },
       { value: 'trustpilot', label: 'Trustpilot' },
@@ -72,7 +78,7 @@ const ReviewSubmission: React.FC<ReviewSubmissionProps> = ({ type, onSubmit }) =
       formData.append('screenshot', file);
     }
 
-    // Simulate submission
+    // Simulate submission with timeout
     setTimeout(() => {
       onSubmit(formData);
       setIsSubmitting(false);
