@@ -14,7 +14,7 @@ const CreditCounter: React.FC<CreditCounterProps> = ({ earningAmount }) => {
       </div>
       <div className="text-sm font-medium">
         <span className="text-brand-purple">Earn {earningAmount} credits</span>
-        <span className="text-gray-600"> for each review</span>
+        <span className="text-gray-600"> for each share</span>
       </div>
     </div>
   );

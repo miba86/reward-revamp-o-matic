@@ -4,8 +4,9 @@ import Header from '../components/Header';
 import Sidebar from '../components/Sidebar';
 import CreditCounter from '../components/CreditCounter';
 import RewardCard from '../components/RewardCard';
+import SocialShareCard from '../components/SocialShareCard';
 import ReviewSubmission from '../components/ReviewSubmission';
-import { Check, Award, Sparkles } from 'lucide-react';
+import { Check, Award, Sparkles, Share2 } from 'lucide-react';
 import { toast } from '@/components/ui/use-toast';
 
 // Platform logos
@@ -16,6 +17,15 @@ const PLATFORM_LOGOS = {
   google: "https://cdn.worldvectorlogo.com/logos/google-2015.svg",
   producthunt: "https://cdn.worldvectorlogo.com/logos/product-hunt.svg", 
   trustradius: "https://media.trustradius.com/logo/product/956a6b2b-3b30-491c-9fb7-d49e8c0bf0f2.png"
+};
+
+// Social platform logos
+const SOCIAL_LOGOS = {
+  twitter: "https://cdn.worldvectorlogo.com/logos/twitter-6.svg",
+  instagram: "https://cdn.worldvectorlogo.com/logos/instagram-2016-5.svg",
+  linkedin: "https://cdn.worldvectorlogo.com/logos/linkedin-icon-2.svg",
+  tiktok: "https://cdn.worldvectorlogo.com/logos/tiktok-1.svg",
+  facebook: "https://cdn.worldvectorlogo.com/logos/facebook-3-2.svg"
 };
 
 const Index = () => {
@@ -59,6 +69,7 @@ const Index = () => {
             </p>
           </div>
           
+          {/* Option 1: Leave a review */}
           <div className="bg-white rounded-xl p-6 border border-gray-100 shadow-soft mb-8">
             <div className="mb-4 flex items-center">
               <div className="step-number">1</div>
@@ -108,11 +119,72 @@ const Index = () => {
             </div>
           </div>
           
+          {/* Option 2: Share videos on social media */}
           <div className="bg-white rounded-xl p-6 border border-gray-100 shadow-soft mb-8">
             <div className="mb-4 flex items-center">
               <div className="step-number">2</div>
               <h2 className="text-xl font-medium flex items-center">
-                Submit your reviews and posts
+                Share Zebracat videos on social media
+                <span className="ml-2 inline-flex animate-float">
+                  <Share2 className="h-5 w-5 text-blue-400" />
+                </span>
+              </h2>
+            </div>
+            
+            <div className="mb-6">
+              <CreditCounter earningAmount={3} />
+            </div>
+            
+            <p className="text-gray-600 mb-5">
+              Share videos created with Zebracat on your social accounts and tag us. We'll reward you with credits for helping spread the word!
+            </p>
+            
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+              <SocialShareCard 
+                name="Twitter" 
+                logo={SOCIAL_LOGOS.twitter}
+                tagName="zebracat_app"
+                onClick={() => window.open('https://twitter.com/intent/tweet?text=Check%20out%20this%20amazing%20video%20I%20created%20with%20@zebracat_app!', '_blank')}
+              />
+              <SocialShareCard 
+                name="Instagram" 
+                logo={SOCIAL_LOGOS.instagram}
+                tagName="zebracatapp"
+                onClick={() => window.open('https://instagram.com', '_blank')}
+              />
+              <SocialShareCard 
+                name="LinkedIn" 
+                logo={SOCIAL_LOGOS.linkedin}
+                tagName="zebracat"
+                onClick={() => window.open('https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fzebracat.io', '_blank')}
+              />
+              <SocialShareCard 
+                name="TikTok" 
+                logo={SOCIAL_LOGOS.tiktok}
+                tagName="zebracat"
+                onClick={() => window.open('https://www.tiktok.com', '_blank')}
+              />
+              <SocialShareCard 
+                name="Facebook" 
+                logo={SOCIAL_LOGOS.facebook}
+                tagName="ZebracatApp"
+                onClick={() => window.open('https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fzebracat.io', '_blank')}
+              />
+            </div>
+            
+            <div className="mt-6 p-4 bg-blue-50 rounded-lg border border-blue-100">
+              <p className="text-sm text-blue-800">
+                <strong>Pro tip:</strong> Make sure to tag Zebracat in your posts and add a link to our website for easy verification. Once shared, submit the link to your post below to claim your credits!
+              </p>
+            </div>
+          </div>
+          
+          {/* Submit review section - now dual purpose for both reviews and social shares */}
+          <div className="bg-white rounded-xl p-6 border border-gray-100 shadow-soft mb-8">
+            <div className="mb-4 flex items-center">
+              <div className="step-number">3</div>
+              <h2 className="text-xl font-medium flex items-center">
+                Submit your reviews and shares
                 <span className="ml-2 inline-flex animate-float">
                   <Award className="h-5 w-5 text-brand-purple" />
                 </span>
