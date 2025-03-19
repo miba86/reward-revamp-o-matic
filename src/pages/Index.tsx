@@ -50,7 +50,9 @@ const BLOG_LOGOS: Record<string, string> = {
   medium: "https://cdn.worldvectorlogo.com/logos/medium-m-2.svg",
   devto: "https://cdn.worldvectorlogo.com/logos/devto.svg",
   hashnode: "https://cdn.worldvectorlogo.com/logos/hashnode.svg",
-  wordpress: "https://cdn.worldvectorlogo.com/logos/wordpress-blue.svg"
+  wordpress: "https://cdn.worldvectorlogo.com/logos/wordpress-blue.svg",
+  linkedin: "https://cdn.worldvectorlogo.com/logos/linkedin-icon-2.svg",
+  personal: "https://cdn.worldvectorlogo.com/logos/blogger-1.svg"
 };
 
 const QA_LOGOS: Record<string, string> = {
@@ -231,26 +233,21 @@ const Index = () => {
             tipBorderColor="border-green-100"
             onSubmitClick={() => openDialog('blog')}
           >
-            <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4">
+            <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-4">
               <RewardCard 
                 name="Medium" 
                 logo={BLOG_LOGOS.medium}
                 onClick={() => window.open('https://medium.com/new-story', '_blank')}
               />
               <RewardCard 
-                name="Dev.to" 
-                logo={BLOG_LOGOS.devto}
-                onClick={() => window.open('https://dev.to/new', '_blank')}
+                name="LinkedIn Article" 
+                logo={BLOG_LOGOS.linkedin}
+                onClick={() => window.open('https://www.linkedin.com/post/new', '_blank')}
               />
               <RewardCard 
-                name="Hashnode" 
-                logo={BLOG_LOGOS.hashnode}
-                onClick={() => window.open('https://hashnode.com/create/story', '_blank')}
-              />
-              <RewardCard 
-                name="WordPress" 
-                logo={BLOG_LOGOS.wordpress}
-                onClick={() => window.open('https://wordpress.com/post', '_blank')}
+                name="Your Website/Blog" 
+                logo={BLOG_LOGOS.personal}
+                onClick={() => window.open('https://zebracat.io/blog-contest', '_blank')}
               />
             </div>
           </RewardSection>
@@ -395,3 +392,4 @@ const Index = () => {
 };
 
 export default Index;
+

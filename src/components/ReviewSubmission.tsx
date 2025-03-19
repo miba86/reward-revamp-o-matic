@@ -38,6 +38,8 @@ const ReviewSubmission: React.FC<ReviewSubmissionProps> = ({ type, onSubmit }) =
     ],
     blog: [
       { value: 'medium', label: 'Medium' },
+      { value: 'linkedin', label: 'LinkedIn Article' },
+      { value: 'personal', label: 'Your Website/Blog' },
       { value: 'devto', label: 'Dev.to' },
       { value: 'hashnode', label: 'Hashnode' },
       { value: 'wordpress', label: 'WordPress' },
@@ -46,6 +48,7 @@ const ReviewSubmission: React.FC<ReviewSubmissionProps> = ({ type, onSubmit }) =
     video: [
       { value: 'youtube', label: 'YouTube' },
       { value: 'tiktok', label: 'TikTok' },
+      { value: 'instagram', label: 'Instagram Reels' },
       { value: 'other', label: 'Other Video Platform' }
     ],
     qa: [
