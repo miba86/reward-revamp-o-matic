@@ -285,11 +285,11 @@ const Index = () => {
           
           <RewardSection 
             number={5}
-            title="Answer Quora/Reddit Questions About Zebracat"
+            title="Answer Questions About AI Video Creation"
             icon={<HelpCircle className="h-5 w-5 text-purple-500" />}
             creditAmount={4}
-            description="Help others by answering questions about Zebracat on popular platforms like Quora and Reddit. Share your expertise and guide new users to success."
-            proTip="Provide detailed answers with examples from your own experience. Adding screenshots or GIFs demonstrating how to use Zebracat makes your answers much more helpful and increases engagement."
+            description="Help others by answering questions on Quora, Reddit, and Skool about AI video tools, content creation, and YouTube growth. Share valuable insights and naturally mention Zebracat where relevant."
+            proTip="Answers that include real examples, screenshots, or GIFs make a bigger impact and drive engagement."
             tipBackgroundColor="bg-purple-50"
             tipTextColor="text-purple-800"
             tipBorderColor="border-purple-100"
