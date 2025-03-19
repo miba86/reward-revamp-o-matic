@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { Upload, Check } from 'lucide-react';
 import { RewardType } from '../types/reward';
@@ -53,7 +54,7 @@ const ReviewSubmission: React.FC<ReviewSubmissionProps> = ({ type, onSubmit }) =
     qa: [
       { value: 'quora', label: 'Quora' },
       { value: 'reddit', label: 'Reddit' },
-      { value: 'stackoverflow', label: 'Stack Overflow' },
+      { value: 'skool', label: 'Skool' },
       { value: 'other', label: 'Other Q&A Platform' }
     ]
   };

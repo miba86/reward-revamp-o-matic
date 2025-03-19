@@ -58,7 +58,7 @@ const BLOG_LOGOS: Record<string, string> = {
 const QA_LOGOS: Record<string, string> = {
   quora: "https://cdn.worldvectorlogo.com/logos/quora-1.svg",
   reddit: "https://cdn.worldvectorlogo.com/logos/reddit-4.svg",
-  stackoverflow: "https://cdn.worldvectorlogo.com/logos/stackoverflow.svg"
+  skool: "https://pbs.twimg.com/profile_images/1555559798178152449/3P9x2dZE_400x400.jpg"
 };
 
 const Index = () => {
@@ -307,9 +307,9 @@ const Index = () => {
                 onClick={() => window.open('https://www.reddit.com/search/?q=zebracat', '_blank')}
               />
               <RewardCard 
-                name="Stack Overflow" 
-                logo={QA_LOGOS.stackoverflow}
-                onClick={() => window.open('https://stackoverflow.com/search?q=zebracat', '_blank')}
+                name="Skool" 
+                logo={QA_LOGOS.skool}
+                onClick={() => window.open('https://www.skool.com', '_blank')}
               />
             </div>
           </RewardSection>
