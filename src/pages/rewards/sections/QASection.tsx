@@ -2,7 +2,8 @@
 import React from 'react';
 import RewardSection from '../../../components/RewardSection';
 import RewardCard from '../../../components/RewardCard';
-import { Check, ArrowRight } from 'lucide-react';
+import { ArrowRight, Check } from 'lucide-react';
+import { Button } from '../../../components/ui/button';
 
 // Q&A platform logos
 const QA_LOGOS: Record<string, string> = {
@@ -35,30 +36,24 @@ const QASection: React.FC<QASectionProps> = ({ openDialog, icon }) => {
     >
       <div className="space-y-6">
         {/* Step 1: Answer questions */}
-        <div className="bg-gray-50 p-4 rounded-lg border border-gray-100">
-          <div className="flex items-center gap-2 mb-3 text-purple-600">
-            <div className="flex items-center justify-center h-6 w-6 rounded-full bg-purple-100 text-xs font-medium">1</div>
+        <div className="bg-white p-5 rounded-xl border border-gray-100 shadow-sm">
+          <div className="flex items-center gap-2 mb-4 text-purple-600">
+            <div className="flex items-center justify-center h-6 w-6 rounded-full bg-purple-100 text-sm font-medium">1</div>
             <h3 className="font-medium">Answer questions on these platforms</h3>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <RewardCard 
-              name="Quora" 
-              logo={QA_LOGOS.quora}
-              onClick={() => window.open('https://www.quora.com/search?q=zebracat', '_blank')}
-            />
-            <RewardCard 
-              name="Reddit" 
-              logo={QA_LOGOS.reddit}
-              onClick={() => window.open('https://www.reddit.com/search/?q=zebracat', '_blank')}
-            />
-            <RewardCard 
-              name="Skool" 
-              logo={QA_LOGOS.skool}
-              onClick={() => window.open('https://www.skool.com', '_blank')}
-            />
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+            {Object.entries(QA_LOGOS).map(([platform, logo]) => (
+              <RewardCard 
+                key={platform}
+                name={platform.charAt(0).toUpperCase() + platform.slice(1)} 
+                logo={logo}
+                onClick={() => window.open(`https://www.${platform}.com${platform === 'quora' || platform === 'reddit' ? '/search/?q=zebracat' : ''}`, '_blank')}
+              />
+            ))}
           </div>
           
-          <div className={`mt-4 p-4 ${tipBackgroundColor} rounded-lg border ${tipBorderColor}`}>
+          <div className={`mt-5 p-4 ${tipBackgroundColor} rounded-lg ${tipBorderColor}`}>
             <p className={`text-sm ${tipTextColor}`}>
               <strong>Pro tip:</strong> Focus on being helpful first. Share personal experiences, practical tips, and real examples. Answers that feel authentic and include screenshots or GIFs get more upvotes and visibility.
             </p>
@@ -67,22 +62,23 @@ const QASection: React.FC<QASectionProps> = ({ openDialog, icon }) => {
         
         {/* Connecting arrow */}
         <div className="flex justify-center">
-          <ArrowRight className="text-gray-400" />
+          <ArrowRight className="text-gray-300" />
         </div>
         
         {/* Step 2: Submit proof */}
-        <div className="bg-gray-50 p-4 rounded-lg border border-gray-100">
-          <div className="flex items-center gap-2 mb-3 text-purple-600">
-            <div className="flex items-center justify-center h-6 w-6 rounded-full bg-purple-100 text-xs font-medium">2</div>
+        <div className="bg-white p-5 rounded-xl border border-gray-100 shadow-sm">
+          <div className="flex items-center gap-2 mb-4 text-purple-600">
+            <div className="flex items-center justify-center h-6 w-6 rounded-full bg-purple-100 text-sm font-medium">2</div>
             <h3 className="font-medium">Submit proof to earn 4 credits</h3>
           </div>
+          
           <div className="flex justify-center">
-            <button 
+            <Button 
               onClick={openDialog}
-              className="rewards-button flex items-center gap-2 py-2 px-4 text-sm"
+              className="bg-brand-purple hover:bg-brand-lightPurple text-white gap-2"
             >
               Submit your answer <Check className="h-4 w-4" />
-            </button>
+            </Button>
           </div>
         </div>
       </div>
