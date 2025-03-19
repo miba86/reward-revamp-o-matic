@@ -17,7 +17,7 @@ import {
 } from "@/components/ui/dialog";
 
 // Platform logos
-const PLATFORM_LOGOS = {
+const PLATFORM_LOGOS: Record<string, string> = {
   g2: "https://cdn.worldvectorlogo.com/logos/g2crowd-1.svg",
   trustpilot: "https://cdn.worldvectorlogo.com/logos/trustpilot.svg",
   capterra: "https://cdn.worldvectorlogo.com/logos/capterra-1.svg",
@@ -446,10 +446,18 @@ const Index = () => {
                   const isQA = review.type === 'qa';
                   const isSocial = review.type === 'social';
                   
-                  let logosObj = PLATFORM_LOGOS;
-                  if (isSocial) logosObj = SOCIAL_LOGOS;
-                  else if (isBlog) logosObj = BLOG_LOGOS;
-                  else if (isQA) logosObj = QA_LOGOS;
+                  let logoSource: Record<string, string>;
+                  if (isReview) {
+                    logoSource = PLATFORM_LOGOS;
+                  } else if (isSocial) {
+                    logoSource = SOCIAL_LOGOS;
+                  } else if (isBlog) {
+                    logoSource = BLOG_LOGOS;
+                  } else if (isQA) {
+                    logoSource = QA_LOGOS;
+                  } else {
+                    logoSource = PLATFORM_LOGOS;
+                  }
                   
                   let typeLabel = '';
                   if (isReview) typeLabel = 'Review';
@@ -466,7 +474,7 @@ const Index = () => {
                       <div className="flex items-center">
                         <div className="h-10 w-10 mr-3 flex items-center justify-center">
                           <img 
-                            src={logosObj[review.platform as keyof typeof logosObj]} 
+                            src={logoSource[review.platform]} 
                             alt={`${review.platform} logo`} 
                             className="w-full h-full object-contain" 
                           />
