@@ -1,7 +1,5 @@
 
 import React from 'react';
-import { Button } from '@/components/ui/button';
-import { Send } from 'lucide-react';
 import CreditCounter from './CreditCounter';
 
 interface RewardSectionProps {
@@ -59,15 +57,6 @@ const RewardSection: React.FC<RewardSectionProps> = ({
         <p className={`text-sm ${tipTextColor}`}>
           <strong>Pro tip:</strong> {proTip}
         </p>
-      </div>
-      
-      <div className="mt-6 flex justify-center">
-        <Button 
-          onClick={onSubmitClick}
-          className="rewards-button flex items-center gap-2"
-        >
-          Start submitting <Send className="h-4 w-4" />
-        </Button>
       </div>
     </div>
   );

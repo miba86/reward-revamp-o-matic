@@ -2,6 +2,7 @@
 import React from 'react';
 import RewardSection from '../../../components/RewardSection';
 import RewardCard from '../../../components/RewardCard';
+import { Check, ArrowRight } from 'lucide-react';
 
 // Blog platform logos
 const BLOG_LOGOS: Record<string, string> = {
@@ -32,23 +33,53 @@ const BlogSection: React.FC<BlogSectionProps> = ({ openDialog, icon }) => {
       tipBorderColor="border-green-100"
       onSubmitClick={openDialog}
     >
-      <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        <RewardCard 
-          name="Your Website/Blog" 
-          logo={BLOG_LOGOS.personal}
-          onClick={() => window.open('https://zebracat.io/blog-contest', '_blank')}
-          isLargeLogo={true}
-        />
-        <RewardCard 
-          name="Medium" 
-          logo={BLOG_LOGOS.medium}
-          onClick={() => window.open('https://medium.com/new-story', '_blank')}
-        />
-        <RewardCard 
-          name="LinkedIn Article" 
-          logo={BLOG_LOGOS.linkedin}
-          onClick={() => window.open('https://www.linkedin.com/post/new', '_blank')}
-        />
+      <div className="space-y-6">
+        {/* Step 1: Write the blog post */}
+        <div className="bg-gray-50 p-4 rounded-lg border border-gray-100">
+          <div className="flex items-center gap-2 mb-3 text-green-600">
+            <div className="flex items-center justify-center h-6 w-6 rounded-full bg-green-100 text-xs font-medium">1</div>
+            <h3 className="font-medium">Write your blog post on any platform</h3>
+          </div>
+          <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            <RewardCard 
+              name="Your Website/Blog" 
+              logo={BLOG_LOGOS.personal}
+              onClick={() => window.open('https://zebracat.io/blog-contest', '_blank')}
+              isLargeLogo={true}
+            />
+            <RewardCard 
+              name="Medium" 
+              logo={BLOG_LOGOS.medium}
+              onClick={() => window.open('https://medium.com/new-story', '_blank')}
+            />
+            <RewardCard 
+              name="LinkedIn Article" 
+              logo={BLOG_LOGOS.linkedin}
+              onClick={() => window.open('https://www.linkedin.com/post/new', '_blank')}
+            />
+          </div>
+        </div>
+        
+        {/* Connecting arrow */}
+        <div className="flex justify-center">
+          <ArrowRight className="text-gray-400" />
+        </div>
+        
+        {/* Step 2: Submit proof */}
+        <div className="bg-gray-50 p-4 rounded-lg border border-gray-100">
+          <div className="flex items-center gap-2 mb-3 text-green-600">
+            <div className="flex items-center justify-center h-6 w-6 rounded-full bg-green-100 text-xs font-medium">2</div>
+            <h3 className="font-medium">Submit proof to earn 8 credits</h3>
+          </div>
+          <div className="flex justify-center">
+            <button 
+              onClick={openDialog}
+              className="rewards-button flex items-center gap-2 py-2 px-4 text-sm"
+            >
+              Submit your blog post <Check className="h-4 w-4" />
+            </button>
+          </div>
+        </div>
       </div>
     </RewardSection>
   );

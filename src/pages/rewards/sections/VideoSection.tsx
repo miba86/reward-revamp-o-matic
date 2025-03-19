@@ -2,7 +2,7 @@
 import React from 'react';
 import RewardSection from '../../../components/RewardSection';
 import VideoPlatformCard from '../../../components/VideoPlatformCard';
-import { Youtube } from 'lucide-react';
+import { Youtube, Check, ArrowRight } from 'lucide-react';
 
 // Social platform logos
 const SOCIAL_LOGOS: Record<string, string> = {
@@ -32,22 +32,52 @@ const VideoSection: React.FC<VideoSectionProps> = ({ openDialog, icon }) => {
       tipBorderColor="border-red-100"
       onSubmitClick={openDialog}
     >
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <VideoPlatformCard 
-          icon={<Youtube className="text-red-500" />} 
-          name="YouTube Tutorial"
-          onClick={() => window.open('https://www.youtube.com/upload', '_blank')}
-        />
-        <VideoPlatformCard 
-          icon={SOCIAL_LOGOS.tiktok} 
-          name="TikTok Tutorial"
-          onClick={() => window.open('https://www.tiktok.com/upload', '_blank')}
-        />
-        <VideoPlatformCard 
-          icon={SOCIAL_LOGOS.instagram} 
-          name="Instagram Reels"
-          onClick={() => window.open('https://www.instagram.com/reels/create/', '_blank')}
-        />
+      <div className="space-y-6">
+        {/* Step 1: Create the video */}
+        <div className="bg-gray-50 p-4 rounded-lg border border-gray-100">
+          <div className="flex items-center gap-2 mb-3 text-red-600">
+            <div className="flex items-center justify-center h-6 w-6 rounded-full bg-red-100 text-xs font-medium">1</div>
+            <h3 className="font-medium">Create and publish your video tutorial</h3>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <VideoPlatformCard 
+              icon={<Youtube className="text-red-500" />} 
+              name="YouTube Tutorial"
+              onClick={() => window.open('https://www.youtube.com/upload', '_blank')}
+            />
+            <VideoPlatformCard 
+              icon={SOCIAL_LOGOS.tiktok} 
+              name="TikTok Tutorial"
+              onClick={() => window.open('https://www.tiktok.com/upload', '_blank')}
+            />
+            <VideoPlatformCard 
+              icon={SOCIAL_LOGOS.instagram} 
+              name="Instagram Reels"
+              onClick={() => window.open('https://www.instagram.com/reels/create/', '_blank')}
+            />
+          </div>
+        </div>
+        
+        {/* Connecting arrow */}
+        <div className="flex justify-center">
+          <ArrowRight className="text-gray-400" />
+        </div>
+        
+        {/* Step 2: Submit proof */}
+        <div className="bg-gray-50 p-4 rounded-lg border border-gray-100">
+          <div className="flex items-center gap-2 mb-3 text-red-600">
+            <div className="flex items-center justify-center h-6 w-6 rounded-full bg-red-100 text-xs font-medium">2</div>
+            <h3 className="font-medium">Submit proof to earn 10 credits</h3>
+          </div>
+          <div className="flex justify-center">
+            <button 
+              onClick={openDialog}
+              className="rewards-button flex items-center gap-2 py-2 px-4 text-sm"
+            >
+              Submit your video <Check className="h-4 w-4" />
+            </button>
+          </div>
+        </div>
       </div>
     </RewardSection>
   );
