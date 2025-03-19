@@ -37,6 +37,7 @@ const BlogSection: React.FC<BlogSectionProps> = ({ openDialog, icon }) => {
           name="Your Website/Blog" 
           logo={BLOG_LOGOS.personal}
           onClick={() => window.open('https://zebracat.io/blog-contest', '_blank')}
+          isLargeLogo={true}
         />
         <RewardCard 
           name="Medium" 

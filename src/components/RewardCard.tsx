@@ -6,15 +6,21 @@ interface RewardCardProps {
   name: string;
   logo: string;
   onClick: () => void;
+  isLargeLogo?: boolean;
 }
 
-const RewardCard: React.FC<RewardCardProps> = ({ name, logo, onClick }) => {
+const RewardCard: React.FC<RewardCardProps> = ({ 
+  name, 
+  logo, 
+  onClick,
+  isLargeLogo = false
+}) => {
   return (
     <div 
       className="platform-card group cursor-pointer" 
       onClick={onClick}
     >
-      <div className="w-16 h-16 mb-3 flex items-center justify-center">
+      <div className={`${isLargeLogo ? 'w-28 h-28' : 'w-16 h-16'} mb-3 flex items-center justify-center`}>
         <img 
           src={logo} 
           alt={`${name} logo`} 
