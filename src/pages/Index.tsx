@@ -6,8 +6,16 @@ import CreditCounter from '../components/CreditCounter';
 import RewardCard from '../components/RewardCard';
 import SocialShareCard from '../components/SocialShareCard';
 import ReviewSubmission from '../components/ReviewSubmission';
-import { Check, Award, Sparkles, Share2 } from 'lucide-react';
-import { toast } from '@/components/ui/use-toast';
+import { Check, Award, Sparkles, Share2, Send } from 'lucide-react';
+import { toast } from '@/hooks/use-toast';
+import { Button } from '@/components/ui/button';
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 
 // Platform logos
 const PLATFORM_LOGOS = {
@@ -30,12 +38,16 @@ const SOCIAL_LOGOS = {
 
 const Index = () => {
   const [submittedReviews, setSubmittedReviews] = useState<any[]>([]);
+  const [reviewDialogOpen, setReviewDialogOpen] = useState(false);
+  const [socialDialogOpen, setSocialDialogOpen] = useState(false);
   
-  const handleReviewSubmit = (formData: FormData) => {
+  const handleSubmit = (formData: FormData) => {
+    const type = formData.get('type') as string;
     const review = {
       id: Date.now(),
       platform: formData.get('platform') as string,
       link: formData.get('link') as string,
+      type: type,
       date: new Date().toISOString(),
       status: 'pending'
     };
@@ -43,10 +55,16 @@ const Index = () => {
     setSubmittedReviews([...submittedReviews, review]);
     
     toast({
-      title: "Review submitted successfully!",
+      title: type === 'review' ? "Review submitted successfully!" : "Social share submitted successfully!",
       description: "We'll verify your submission and add credits to your account within 24 hours.",
       className: "bg-green-50 border-green-200",
     });
+
+    if (type === 'review') {
+      setReviewDialogOpen(false);
+    } else {
+      setSocialDialogOpen(false);
+    }
   };
 
   const creditInfo = {
@@ -117,6 +135,15 @@ const Index = () => {
                 onClick={() => window.open('https://www.trustradius.com/products/zebracat/reviews', '_blank')}
               />
             </div>
+            
+            <div className="mt-6 flex justify-center">
+              <Button 
+                onClick={() => setReviewDialogOpen(true)}
+                className="rewards-button flex items-center gap-2"
+              >
+                Start submitting <Send className="h-4 w-4" />
+              </Button>
+            </div>
           </div>
           
           {/* Option 2: Share videos on social media */}
@@ -177,34 +204,32 @@ const Index = () => {
                 <strong>Pro tip:</strong> Make sure to tag Zebracat in your posts and add a link to our website for easy verification. Once shared, submit the link to your post below to claim your credits!
               </p>
             </div>
+            
+            <div className="mt-6 flex justify-center">
+              <Button 
+                onClick={() => setSocialDialogOpen(true)}
+                className="rewards-button flex items-center gap-2"
+              >
+                Start submitting <Send className="h-4 w-4" />
+              </Button>
+            </div>
           </div>
           
-          {/* Submit review section - now dual purpose for both reviews and social shares */}
-          <div className="bg-white rounded-xl p-6 border border-gray-100 shadow-soft mb-8">
-            <div className="mb-4 flex items-center">
-              <div className="step-number">3</div>
-              <h2 className="text-xl font-medium flex items-center">
-                Submit your reviews and shares
+          {/* Your Submissions section */}
+          {submittedReviews.length > 0 && (
+            <div className="bg-white rounded-xl p-6 border border-gray-100 shadow-soft mb-8">
+              <h3 className="text-lg font-medium mb-4 flex items-center">
+                Your Submissions
                 <span className="ml-2 inline-flex animate-float">
                   <Award className="h-5 w-5 text-brand-purple" />
                 </span>
-              </h2>
-            </div>
-            
-            <p className="text-gray-600 mb-6">
-              Upload screenshots or provide links to your posts here. We'll verify and add the rewards to your account. Verification typically takes up to 24 hours, and we'll notify you via email once it's complete.
-            </p>
-            
-            <ReviewSubmission
-              reviewNumber={1}
-              onSubmit={handleReviewSubmit}
-            />
-            
-            {submittedReviews.length > 0 && (
-              <div className="mt-8">
-                <h3 className="text-lg font-medium mb-4">Your Submissions</h3>
-                <div className="space-y-3">
-                  {submittedReviews.map((review) => (
+              </h3>
+              <div className="space-y-3">
+                {submittedReviews.map((review) => {
+                  const isReview = review.type === 'review';
+                  const logosObj = isReview ? PLATFORM_LOGOS : SOCIAL_LOGOS;
+                  
+                  return (
                     <div 
                       key={review.id} 
                       className="p-4 border border-gray-100 rounded-lg bg-gray-50 flex items-center justify-between animate-fade-in"
@@ -212,13 +237,15 @@ const Index = () => {
                       <div className="flex items-center">
                         <div className="h-10 w-10 mr-3 flex items-center justify-center">
                           <img 
-                            src={PLATFORM_LOGOS[review.platform as keyof typeof PLATFORM_LOGOS]} 
+                            src={logosObj[review.platform as keyof typeof logosObj]} 
                             alt={`${review.platform} logo`} 
                             className="w-full h-full object-contain" 
                           />
                         </div>
                         <div>
-                          <div className="font-medium">{review.platform.charAt(0).toUpperCase() + review.platform.slice(1)} Review</div>
+                          <div className="font-medium">
+                            {isReview ? `${review.platform.charAt(0).toUpperCase() + review.platform.slice(1)} Review` : `${review.platform.charAt(0).toUpperCase() + review.platform.slice(1)} Share`}
+                          </div>
                           <div className="text-sm text-gray-500 truncate max-w-xs">
                             {review.link}
                           </div>
@@ -230,13 +257,43 @@ const Index = () => {
                         </span>
                       </div>
                     </div>
-                  ))}
-                </div>
+                  );
+                })}
               </div>
-            )}
-          </div>
+            </div>
+          )}
         </main>
       </div>
+
+      {/* Review Dialog */}
+      <Dialog open={reviewDialogOpen} onOpenChange={setReviewDialogOpen}>
+        <DialogContent className="sm:max-w-[600px]">
+          <DialogHeader>
+            <DialogTitle>Submit Your Review</DialogTitle>
+            <DialogDescription>
+              Add a link to your review and upload a screenshot for verification. We'll reward you with 5 credits once verified.
+            </DialogDescription>
+          </DialogHeader>
+          <div className="mt-4">
+            <ReviewSubmission type="review" onSubmit={handleSubmit} />
+          </div>
+        </DialogContent>
+      </Dialog>
+
+      {/* Social Share Dialog */}
+      <Dialog open={socialDialogOpen} onOpenChange={setSocialDialogOpen}>
+        <DialogContent className="sm:max-w-[600px]">
+          <DialogHeader>
+            <DialogTitle>Submit Your Social Share</DialogTitle>
+            <DialogDescription>
+              Add a link to your social post and upload a screenshot for verification. We'll reward you with 3 credits once verified.
+            </DialogDescription>
+          </DialogHeader>
+          <div className="mt-4">
+            <ReviewSubmission type="social" onSubmit={handleSubmit} />
+          </div>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 };
