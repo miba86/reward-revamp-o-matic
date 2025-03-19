@@ -22,7 +22,6 @@ interface ReviewSectionProps {
 const ReviewSection: React.FC<ReviewSectionProps> = ({ openDialog, icon }) => {
   return (
     <RewardSection 
-      number={2}
       title="Leave a review about Zebracat"
       icon={icon}
       creditAmount={5}
@@ -31,7 +30,6 @@ const ReviewSection: React.FC<ReviewSectionProps> = ({ openDialog, icon }) => {
       tipBackgroundColor="bg-amber-50"
       tipTextColor="text-amber-800"
       tipBorderColor="border-amber-100"
-      onSubmitClick={openDialog}
     >
       <div className="space-y-6">
         {/* Step 1: Write the review */}
@@ -71,6 +69,12 @@ const ReviewSection: React.FC<ReviewSectionProps> = ({ openDialog, icon }) => {
               logo={PLATFORM_LOGOS.trustradius}
               onClick={() => window.open('https://www.trustradius.com/products/zebracat/reviews', '_blank')}
             />
+          </div>
+          
+          <div className={`mt-4 p-4 bg-amber-50 rounded-lg border border-amber-100`}>
+            <p className={`text-sm text-amber-800`}>
+              <strong>Pro tip:</strong> Include specific features you love and how Zebracat has helped your workflow for the most impactful reviews. Screenshots of your experience with the app are highly appreciated!
+            </p>
           </div>
         </div>
         

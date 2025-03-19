@@ -21,7 +21,6 @@ interface VideoSectionProps {
 const VideoSection: React.FC<VideoSectionProps> = ({ openDialog, icon }) => {
   return (
     <RewardSection 
-      number={4}
       title="Publishing a YouTube Video, TikTok, or IG Reels Tutorial About Zebracat"
       icon={icon}
       creditAmount={10}
@@ -30,7 +29,6 @@ const VideoSection: React.FC<VideoSectionProps> = ({ openDialog, icon }) => {
       tipBackgroundColor="bg-red-50"
       tipTextColor="text-red-800"
       tipBorderColor="border-red-100"
-      onSubmitClick={openDialog}
     >
       <div className="space-y-6">
         {/* Step 1: Create the video */}
@@ -55,6 +53,12 @@ const VideoSection: React.FC<VideoSectionProps> = ({ openDialog, icon }) => {
               name="Instagram Reels"
               onClick={() => window.open('https://www.instagram.com/reels/create/', '_blank')}
             />
+          </div>
+          
+          <div className={`mt-4 p-4 bg-red-50 rounded-lg border border-red-100`}>
+            <p className={`text-sm text-red-800`}>
+              <strong>Pro tip:</strong> Keep videos under 5 minutes for better engagement. Focus on solving one specific problem or showcasing one feature in depth rather than trying to cover everything.
+            </p>
           </div>
         </div>
         

@@ -22,7 +22,6 @@ interface BlogSectionProps {
 const BlogSection: React.FC<BlogSectionProps> = ({ openDialog, icon }) => {
   return (
     <RewardSection 
-      number={3}
       title="Write a Blog Post or Medium Article About Zebracat"
       icon={icon}
       creditAmount={8}
@@ -31,7 +30,6 @@ const BlogSection: React.FC<BlogSectionProps> = ({ openDialog, icon }) => {
       tipBackgroundColor="bg-green-50"
       tipTextColor="text-green-800"
       tipBorderColor="border-green-100"
-      onSubmitClick={openDialog}
     >
       <div className="space-y-6">
         {/* Step 1: Write the blog post */}
@@ -57,6 +55,12 @@ const BlogSection: React.FC<BlogSectionProps> = ({ openDialog, icon }) => {
               logo={BLOG_LOGOS.linkedin}
               onClick={() => window.open('https://www.linkedin.com/post/new', '_blank')}
             />
+          </div>
+          
+          <div className={`mt-4 p-4 bg-green-50 rounded-lg border border-green-100`}>
+            <p className={`text-sm text-green-800`}>
+              <strong>Pro tip:</strong> Add screenshots, use cases, and step-by-step guides for better results. Mention Zebracat early in your article and include a link using natural wording (e.g., I used this AI video tool to create my latest project).
+            </p>
           </div>
         </div>
         

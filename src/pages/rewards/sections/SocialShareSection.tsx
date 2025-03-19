@@ -21,7 +21,6 @@ interface SocialShareSectionProps {
 const SocialShareSection: React.FC<SocialShareSectionProps> = ({ openDialog, icon }) => {
   return (
     <RewardSection 
-      number={1}
       title="Share Zebracat videos on social media"
       icon={icon}
       creditAmount={3}
@@ -30,7 +29,6 @@ const SocialShareSection: React.FC<SocialShareSectionProps> = ({ openDialog, ico
       tipBackgroundColor="bg-blue-50"
       tipTextColor="text-blue-800"
       tipBorderColor="border-blue-100"
-      onSubmitClick={openDialog}
     >
       <div className="space-y-6">
         {/* Step 1: Share on social media */}
@@ -76,6 +74,12 @@ const SocialShareSection: React.FC<SocialShareSectionProps> = ({ openDialog, ico
               tagName="zebracat_app"
               onClick={() => window.open('https://twitter.com/intent/tweet?text=Check%20out%20this%20amazing%20video%20I%20created%20with%20@zebracat_app!', '_blank')}
             />
+          </div>
+          
+          <div className={`mt-4 p-4 bg-blue-50 rounded-lg border border-blue-100`}>
+            <p className={`text-sm text-blue-800`}>
+              <strong>Pro tip:</strong> Make sure to tag Zebracat in your posts and add a link to our website for easy verification. Once shared, submit the link to your post below to claim your credits!
+            </p>
           </div>
         </div>
         

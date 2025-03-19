@@ -19,7 +19,6 @@ interface QASectionProps {
 const QASection: React.FC<QASectionProps> = ({ openDialog, icon }) => {
   return (
     <RewardSection 
-      number={5}
       title="Answer Questions About AI Video Creation"
       icon={icon}
       creditAmount={4}
@@ -28,7 +27,6 @@ const QASection: React.FC<QASectionProps> = ({ openDialog, icon }) => {
       tipBackgroundColor="bg-purple-50"
       tipTextColor="text-purple-800"
       tipBorderColor="border-purple-100"
-      onSubmitClick={openDialog}
     >
       <div className="space-y-6">
         {/* Step 1: Answer questions */}
@@ -53,6 +51,12 @@ const QASection: React.FC<QASectionProps> = ({ openDialog, icon }) => {
               logo={QA_LOGOS.skool}
               onClick={() => window.open('https://www.skool.com', '_blank')}
             />
+          </div>
+          
+          <div className={`mt-4 p-4 ${tipBackgroundColor} rounded-lg border ${tipBorderColor}`}>
+            <p className={`text-sm ${tipTextColor}`}>
+              <strong>Pro tip:</strong> Focus on being helpful first. Share personal experiences, practical tips, and real examples. Answers that feel authentic and include screenshots or GIFs get more upvotes and visibility.
+            </p>
           </div>
         </div>
         
