@@ -2,7 +2,7 @@
 import React from 'react';
 import RewardSection from '../../../components/RewardSection';
 import RewardCard from '../../../components/RewardCard';
-import { Check } from 'lucide-react';
+import { Check, Play, HelpCircle } from 'lucide-react';
 import { Button } from '../../../components/ui/button';
 
 // Q&A platform logos
@@ -35,6 +35,17 @@ const QASection: React.FC<QASectionProps> = ({ openDialog, icon }) => {
       tipBorderColor={tipBorderColor}
     >
       <div className="space-y-6">
+        {/* How it works button */}
+        <div className="flex justify-center mb-2">
+          <Button 
+            variant="outline" 
+            className="flex items-center gap-2 text-purple-600 border-purple-200 hover:bg-purple-50"
+            onClick={() => window.open('https://example.com/tutorial-video', '_blank')}
+          >
+            <Play className="h-4 w-4" /> How it works
+          </Button>
+        </div>
+        
         {/* Step 1: Answer questions */}
         <div className="bg-white p-5 rounded-xl border border-gray-100 shadow-sm">
           <div className="flex items-center gap-2 mb-4 text-purple-600">
