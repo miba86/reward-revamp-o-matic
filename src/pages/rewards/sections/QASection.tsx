@@ -2,7 +2,7 @@
 import React from 'react';
 import RewardSection from '../../../components/RewardSection';
 import RewardCard from '../../../components/RewardCard';
-import { ArrowRight, Check } from 'lucide-react';
+import { Check } from 'lucide-react';
 import { Button } from '../../../components/ui/button';
 
 // Q&A platform logos
@@ -58,11 +58,6 @@ const QASection: React.FC<QASectionProps> = ({ openDialog, icon }) => {
               <strong>Pro tip:</strong> Focus on being helpful first. Share personal experiences, practical tips, and real examples. Answers that feel authentic and include screenshots or GIFs get more upvotes and visibility.
             </p>
           </div>
-        </div>
-        
-        {/* Connecting arrow */}
-        <div className="flex justify-center">
-          <ArrowRight className="text-gray-300" />
         </div>
         
         {/* Step 2: Submit proof */}

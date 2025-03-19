@@ -2,7 +2,7 @@
 import React from 'react';
 import RewardSection from '../../../components/RewardSection';
 import RewardCard from '../../../components/RewardCard';
-import { Check, ArrowRight } from 'lucide-react';
+import { Check } from 'lucide-react';
 
 // Blog platform logos
 const BLOG_LOGOS: Record<string, string> = {
@@ -62,11 +62,6 @@ const BlogSection: React.FC<BlogSectionProps> = ({ openDialog, icon }) => {
               <strong>Pro tip:</strong> Add screenshots, use cases, and step-by-step guides for better results. Mention Zebracat early in your article and include a link using natural wording (e.g., I used this AI video tool to create my latest project).
             </p>
           </div>
-        </div>
-        
-        {/* Connecting arrow */}
-        <div className="flex justify-center">
-          <ArrowRight className="text-gray-400" />
         </div>
         
         {/* Step 2: Submit proof */}

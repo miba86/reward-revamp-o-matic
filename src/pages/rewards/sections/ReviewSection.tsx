@@ -2,7 +2,7 @@
 import React from 'react';
 import RewardSection from '../../../components/RewardSection';
 import RewardCard from '../../../components/RewardCard';
-import { Check, ArrowRight } from 'lucide-react';
+import { Check } from 'lucide-react';
 
 // Platform logos
 const PLATFORM_LOGOS: Record<string, string> = {
@@ -76,11 +76,6 @@ const ReviewSection: React.FC<ReviewSectionProps> = ({ openDialog, icon }) => {
               <strong>Pro tip:</strong> Include specific features you love and how Zebracat has helped your workflow for the most impactful reviews. Screenshots of your experience with the app are highly appreciated!
             </p>
           </div>
-        </div>
-        
-        {/* Connecting arrow */}
-        <div className="flex justify-center">
-          <ArrowRight className="text-gray-400" />
         </div>
         
         {/* Step 2: Submit proof */}

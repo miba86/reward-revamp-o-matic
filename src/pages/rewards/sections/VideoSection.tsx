@@ -2,7 +2,7 @@
 import React from 'react';
 import RewardSection from '../../../components/RewardSection';
 import VideoPlatformCard from '../../../components/VideoPlatformCard';
-import { Youtube, Check, ArrowRight } from 'lucide-react';
+import { Youtube, Check } from 'lucide-react';
 
 // Social platform logos
 const SOCIAL_LOGOS: Record<string, string> = {
@@ -60,11 +60,6 @@ const VideoSection: React.FC<VideoSectionProps> = ({ openDialog, icon }) => {
               <strong>Pro tip:</strong> Keep videos under 5 minutes for better engagement. Focus on solving one specific problem or showcasing one feature in depth rather than trying to cover everything.
             </p>
           </div>
-        </div>
-        
-        {/* Connecting arrow */}
-        <div className="flex justify-center">
-          <ArrowRight className="text-gray-400" />
         </div>
         
         {/* Step 2: Submit proof */}

@@ -2,7 +2,7 @@
 import React from 'react';
 import RewardSection from '../../../components/RewardSection';
 import SocialShareCard from '../../../components/SocialShareCard';
-import { Youtube, Check, ArrowRight } from 'lucide-react';
+import { Youtube, Check } from 'lucide-react';
 
 // Social platform logos
 const SOCIAL_LOGOS: Record<string, string> = {
@@ -81,11 +81,6 @@ const SocialShareSection: React.FC<SocialShareSectionProps> = ({ openDialog, ico
               <strong>Pro tip:</strong> Make sure to tag Zebracat in your posts and add a link to our website for easy verification. Once shared, submit the link to your post below to claim your credits!
             </p>
           </div>
-        </div>
-        
-        {/* Connecting arrow */}
-        <div className="flex justify-center">
-          <ArrowRight className="text-gray-400" />
         </div>
         
         {/* Step 2: Submit proof */}
