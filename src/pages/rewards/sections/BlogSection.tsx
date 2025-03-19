@@ -5,7 +5,7 @@ import RewardCard from '../../../components/RewardCard';
 
 // Blog platform logos
 const BLOG_LOGOS: Record<string, string> = {
-  personal: "/lovable-uploads/f933e7cc-3024-4cd9-9c70-82ff2c0982f9.png",
+  personal: "/lovable-uploads/1f3829e8-16a0-4e16-b619-f713e09872be.png",
   medium: "https://cdn.worldvectorlogo.com/logos/medium-m-2.svg",
   linkedin: "https://cdn.worldvectorlogo.com/logos/linkedin-icon-2.svg",
   devto: "https://cdn.worldvectorlogo.com/logos/devto.svg",
