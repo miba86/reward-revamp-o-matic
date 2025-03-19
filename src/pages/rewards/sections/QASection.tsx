@@ -17,6 +17,11 @@ interface QASectionProps {
 }
 
 const QASection: React.FC<QASectionProps> = ({ openDialog, icon }) => {
+  // Define tip styling variables
+  const tipBackgroundColor = "bg-purple-50";
+  const tipTextColor = "text-purple-800";
+  const tipBorderColor = "border-purple-100";
+
   return (
     <RewardSection 
       title="Answer Questions About AI Video Creation"
@@ -24,9 +29,9 @@ const QASection: React.FC<QASectionProps> = ({ openDialog, icon }) => {
       creditAmount={4}
       description="Help others by answering questions on Quora, Reddit, and Skool about AI video tools, content creation, and YouTube growth. Share valuable insights and naturally mention Zebracat where relevant."
       proTip="Focus on being helpful first. Share personal experiences, practical tips, and real examples. Answers that feel authentic and include screenshots or GIFs get more upvotes and visibility."
-      tipBackgroundColor="bg-purple-50"
-      tipTextColor="text-purple-800"
-      tipBorderColor="border-purple-100"
+      tipBackgroundColor={tipBackgroundColor}
+      tipTextColor={tipTextColor}
+      tipBorderColor={tipBorderColor}
     >
       <div className="space-y-6">
         {/* Step 1: Answer questions */}
