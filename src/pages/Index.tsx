@@ -58,7 +58,7 @@ const BLOG_LOGOS: Record<string, string> = {
 const QA_LOGOS: Record<string, string> = {
   quora: "https://cdn.worldvectorlogo.com/logos/quora-1.svg",
   reddit: "https://cdn.worldvectorlogo.com/logos/reddit-4.svg",
-  skool: "https://pbs.twimg.com/profile_images/1555559798178152449/3P9x2dZE_400x400.jpg"
+  skool: "/lovable-uploads/7a3847d8-cd8e-447f-a47b-a4b3804a41fc.png"
 };
 
 const Index = () => {
