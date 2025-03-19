@@ -43,7 +43,8 @@ const SOCIAL_LOGOS: Record<string, string> = {
   instagram: "https://cdn.worldvectorlogo.com/logos/instagram-2016-5.svg",
   linkedin: "https://cdn.worldvectorlogo.com/logos/linkedin-icon-2.svg",
   tiktok: "https://cdn.worldvectorlogo.com/logos/tiktok-1.svg",
-  facebook: "https://cdn.worldvectorlogo.com/logos/facebook-3-2.svg"
+  facebook: "https://cdn.worldvectorlogo.com/logos/facebook-3-2.svg",
+  youtube: "https://cdn.worldvectorlogo.com/logos/youtube-icon.svg"
 };
 
 const BLOG_LOGOS: Record<string, string> = {
@@ -141,24 +142,12 @@ const Index = () => {
             tipBorderColor="border-blue-100"
             onSubmitClick={() => openDialog('social')}
           >
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
               <SocialShareCard 
-                name="Twitter" 
-                logo={SOCIAL_LOGOS.twitter}
+                name="YouTube" 
+                logo={SOCIAL_LOGOS.youtube}
                 tagName="zebracat_app"
-                onClick={() => window.open('https://twitter.com/intent/tweet?text=Check%20out%20this%20amazing%20video%20I%20created%20with%20@zebracat_app!', '_blank')}
-              />
-              <SocialShareCard 
-                name="Instagram" 
-                logo={SOCIAL_LOGOS.instagram}
-                tagName="zebracatapp"
-                onClick={() => window.open('https://instagram.com', '_blank')}
-              />
-              <SocialShareCard 
-                name="LinkedIn" 
-                logo={SOCIAL_LOGOS.linkedin}
-                tagName="zebracat"
-                onClick={() => window.open('https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fzebracat.io', '_blank')}
+                onClick={() => window.open('https://youtube.com/upload', '_blank')}
               />
               <SocialShareCard 
                 name="TikTok" 
@@ -167,10 +156,28 @@ const Index = () => {
                 onClick={() => window.open('https://www.tiktok.com', '_blank')}
               />
               <SocialShareCard 
+                name="Instagram" 
+                logo={SOCIAL_LOGOS.instagram}
+                tagName="zebracatapp"
+                onClick={() => window.open('https://instagram.com', '_blank')}
+              />
+              <SocialShareCard 
                 name="Facebook" 
                 logo={SOCIAL_LOGOS.facebook}
                 tagName="ZebracatApp"
                 onClick={() => window.open('https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fzebracat.io', '_blank')}
+              />
+              <SocialShareCard 
+                name="LinkedIn" 
+                logo={SOCIAL_LOGOS.linkedin}
+                tagName="zebracat"
+                onClick={() => window.open('https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fzebracat.io', '_blank')}
+              />
+              <SocialShareCard 
+                name="Twitter" 
+                logo={SOCIAL_LOGOS.twitter}
+                tagName="zebracat_app"
+                onClick={() => window.open('https://twitter.com/intent/tweet?text=Check%20out%20this%20amazing%20video%20I%20created%20with%20@zebracat_app!', '_blank')}
               />
             </div>
           </RewardSection>
