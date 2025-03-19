@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import Header from '../components/Header';
 import Sidebar from '../components/Sidebar';
@@ -6,7 +5,7 @@ import CreditCounter from '../components/CreditCounter';
 import RewardCard from '../components/RewardCard';
 import SocialShareCard from '../components/SocialShareCard';
 import ReviewSubmission from '../components/ReviewSubmission';
-import { Check, Award, Sparkles, Share2, Send, Book, Youtube, MessageSquare, HelpCircle } from 'lucide-react';
+import { Check, Award, Sparkles, Share2, Send, Book, Youtube, MessageSquare, HelpCircle, ArrowRight } from 'lucide-react';
 import { toast } from '@/hooks/use-toast';
 import { Button } from '@/components/ui/button';
 import {
@@ -28,7 +27,7 @@ const PLATFORM_LOGOS = {
 };
 
 // Social platform logos
-const SOCIAL_LOGOS = {
+const SOCIAL_LOGOS: Record<string, string> = {
   twitter: "https://cdn.worldvectorlogo.com/logos/twitter-6.svg",
   instagram: "https://cdn.worldvectorlogo.com/logos/instagram-2016-5.svg",
   linkedin: "https://cdn.worldvectorlogo.com/logos/linkedin-icon-2.svg",
@@ -37,7 +36,7 @@ const SOCIAL_LOGOS = {
 };
 
 // Blog platform logos
-const BLOG_LOGOS = {
+const BLOG_LOGOS: Record<string, string> = {
   medium: "https://cdn.worldvectorlogo.com/logos/medium-m-2.svg",
   devto: "https://cdn.worldvectorlogo.com/logos/devto.svg",
   hashnode: "https://cdn.worldvectorlogo.com/logos/hashnode.svg",
@@ -45,7 +44,7 @@ const BLOG_LOGOS = {
 };
 
 // Q&A platform logos
-const QA_LOGOS = {
+const QA_LOGOS: Record<string, string> = {
   quora: "https://cdn.worldvectorlogo.com/logos/quora-1.svg",
   reddit: "https://cdn.worldvectorlogo.com/logos/reddit-4.svg",
   stackoverflow: "https://cdn.worldvectorlogo.com/logos/stackoverflow.svg"
@@ -574,4 +573,3 @@ const Index = () => {
 };
 
 export default Index;
-
