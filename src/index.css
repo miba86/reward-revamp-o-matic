@@ -1,3 +1,4 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -13,7 +14,7 @@
     --popover: 0 0% 100%;
     --popover-foreground: 222.2 84% 4.9%;
 
-    --primary: 222.2 47.4% 11.2%;
+    --primary: 260 100% 61%;
     --primary-foreground: 210 40% 98%;
 
     --secondary: 210 40% 96.1%;
@@ -32,22 +33,15 @@
     --input: 214.3 31.8% 91.4%;
     --ring: 222.2 84% 4.9%;
 
-    --radius: 0.5rem;
+    --radius: 0.8rem;
 
     --sidebar-background: 0 0% 98%;
-
     --sidebar-foreground: 240 5.3% 26.1%;
-
     --sidebar-primary: 240 5.9% 10%;
-
     --sidebar-primary-foreground: 0 0% 98%;
-
     --sidebar-accent: 240 4.8% 95.9%;
-
     --sidebar-accent-foreground: 240 5.9% 10%;
-
     --sidebar-border: 220 13% 91%;
-
     --sidebar-ring: 217.2 91.2% 59.8%;
   }
 
@@ -96,6 +90,49 @@
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground antialiased;
+    font-feature-settings: "ss01", "ss02", "cv01", "cv02", "cv03";
+  }
+
+  html {
+    @apply scroll-smooth;
+  }
+
+  #root {
+    @apply max-w-none p-0 m-0 text-left;
+  }
+}
+
+@layer components {
+  .main-container {
+    @apply max-w-[1400px] w-full mx-auto px-4 md:px-6;
+  }
+
+  .platform-card {
+    @apply flex flex-col items-center justify-center p-4 bg-white rounded-xl border border-gray-100 shadow-soft transition-all duration-300 hover:shadow-lg hover:-translate-y-1;
+  }
+
+  .shimmer-effect {
+    @apply bg-gradient-to-r from-transparent via-white to-transparent bg-[length:200%_100%] animate-shimmer;
+  }
+
+  .glass-card {
+    @apply bg-white/80 backdrop-blur-sm border border-white/20 shadow-soft;
+  }
+
+  .rewards-button {
+    @apply bg-brand-purple hover:bg-brand-lightPurple text-white font-medium rounded-xl px-6 py-3 transition-all duration-200 shadow-button hover:shadow-lg hover:scale-[1.02] active:scale-[0.98];
+  }
+
+  .step-number {
+    @apply inline-flex items-center justify-center w-8 h-8 rounded-full bg-brand-purple text-white font-bold text-sm mr-2;
+  }
+  
+  .progress-track {
+    @apply h-2 w-full bg-gray-100 rounded-full overflow-hidden;
+  }
+  
+  .progress-fill {
+    @apply h-full bg-brand-purple rounded-full transition-all duration-500 ease-out;
   }
 }
