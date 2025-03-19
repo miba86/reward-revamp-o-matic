@@ -8,6 +8,8 @@ import { Review } from '../../types/reward';
 import { toast } from '@/hooks/use-toast';
 import RewardsDialogs from './RewardsDialogs';
 import RewardsSections from './RewardsSections';
+import { Button } from '@/components/ui/button';
+import { Play } from 'lucide-react';
 
 const RewardsPage = () => {
   const [submittedReviews, setSubmittedReviews] = useState<Review[]>([]);
@@ -60,9 +62,18 @@ const RewardsPage = () => {
         <main className="flex-1 px-8 py-6 max-w-5xl">
           <div className="mb-8">
             <h1 className="text-3xl font-semibold mb-2 text-zebra-dark">Want to create videos for free?</h1>
-            <p className="text-gray-600 max-w-3xl">
-              Help us grow and we'll return the favour! You can now earn credits by completing simple tasks which help us spread the word and find new users. Please follow instructions and tips carefully to claim your rewards.
-            </p>
+            <div className="flex items-start justify-between mb-4">
+              <p className="text-gray-600 max-w-3xl">
+                Help us grow and we'll return the favour! You can now earn credits by completing simple tasks which help us spread the word and find new users. Please follow instructions and tips carefully to claim your rewards.
+              </p>
+              <Button 
+                variant="outline" 
+                className="flex items-center gap-2 text-purple-600 border-purple-200 hover:bg-purple-50 ml-4"
+                onClick={() => window.open('https://example.com/tutorial-video', '_blank')}
+              >
+                <Play className="h-4 w-4" /> How it works
+              </Button>
+            </div>
           </div>
           
           <RewardsSections openDialog={rewardDialogs.openDialog} />
