@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Upload, Check } from 'lucide-react';
 import { RewardType } from '../types/reward';
@@ -37,9 +36,9 @@ const ReviewSubmission: React.FC<ReviewSubmissionProps> = ({ type, onSubmit }) =
       { value: 'facebook', label: 'Facebook' }
     ],
     blog: [
+      { value: 'personal', label: 'Your Website/Blog' },
       { value: 'medium', label: 'Medium' },
       { value: 'linkedin', label: 'LinkedIn Article' },
-      { value: 'personal', label: 'Your Website/Blog' },
       { value: 'devto', label: 'Dev.to' },
       { value: 'hashnode', label: 'Hashnode' },
       { value: 'wordpress', label: 'WordPress' },

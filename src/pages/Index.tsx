@@ -47,12 +47,12 @@ const SOCIAL_LOGOS: Record<string, string> = {
 };
 
 const BLOG_LOGOS: Record<string, string> = {
+  personal: "https://cdn.worldvectorlogo.com/logos/blogger-1.svg",
   medium: "https://cdn.worldvectorlogo.com/logos/medium-m-2.svg",
+  linkedin: "https://cdn.worldvectorlogo.com/logos/linkedin-icon-2.svg",
   devto: "https://cdn.worldvectorlogo.com/logos/devto.svg",
   hashnode: "https://cdn.worldvectorlogo.com/logos/hashnode.svg",
-  wordpress: "https://cdn.worldvectorlogo.com/logos/wordpress-blue.svg",
-  linkedin: "https://cdn.worldvectorlogo.com/logos/linkedin-icon-2.svg",
-  personal: "https://cdn.worldvectorlogo.com/logos/blogger-1.svg"
+  wordpress: "https://cdn.worldvectorlogo.com/logos/wordpress-blue.svg"
 };
 
 const QA_LOGOS: Record<string, string> = {
@@ -235,6 +235,11 @@ const Index = () => {
           >
             <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-4">
               <RewardCard 
+                name="Your Website/Blog" 
+                logo={BLOG_LOGOS.personal}
+                onClick={() => window.open('https://zebracat.io/blog-contest', '_blank')}
+              />
+              <RewardCard 
                 name="Medium" 
                 logo={BLOG_LOGOS.medium}
                 onClick={() => window.open('https://medium.com/new-story', '_blank')}
@@ -243,11 +248,6 @@ const Index = () => {
                 name="LinkedIn Article" 
                 logo={BLOG_LOGOS.linkedin}
                 onClick={() => window.open('https://www.linkedin.com/post/new', '_blank')}
-              />
-              <RewardCard 
-                name="Your Website/Blog" 
-                logo={BLOG_LOGOS.personal}
-                onClick={() => window.open('https://zebracat.io/blog-contest', '_blank')}
               />
             </div>
           </RewardSection>
@@ -392,4 +392,3 @@ const Index = () => {
 };
 
 export default Index;
-

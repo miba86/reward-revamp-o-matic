@@ -19,6 +19,11 @@ const RewardCard: React.FC<RewardCardProps> = ({ name, logo, onClick }) => {
           src={logo} 
           alt={`${name} logo`} 
           className="w-full h-full object-contain transition-transform group-hover:scale-110" 
+          onError={(e) => {
+            const target = e.target as HTMLImageElement;
+            target.onerror = null;
+            target.src = "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=200&h=200";
+          }}
         />
       </div>
       <div className="flex items-center mt-1">
