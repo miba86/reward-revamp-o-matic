@@ -34,15 +34,15 @@ const QASection: React.FC<QASectionProps> = ({ openDialog, icon }) => {
       tipTextColor={tipTextColor}
       tipBorderColor={tipBorderColor}
     >
-      <div className="space-y-6">
+      <div className="space-y-4 md:space-y-6">
         {/* Step 1: Answer questions */}
-        <div className="bg-white p-5 rounded-xl border border-gray-100 shadow-sm">
+        <div className="bg-white p-4 md:p-5 rounded-xl border border-gray-100 shadow-sm">
           <div className="flex items-center gap-2 mb-4 text-purple-600">
             <div className="flex items-center justify-center h-6 w-6 rounded-full bg-purple-100 text-sm font-medium">1</div>
-            <h3 className="font-medium">Answer questions on these platforms</h3>
+            <h3 className="font-medium text-sm md:text-base">Answer questions on these platforms</h3>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
             {Object.entries(QA_LOGOS).map(([platform, logo]) => (
               <RewardCard 
                 key={platform}
@@ -53,24 +53,24 @@ const QASection: React.FC<QASectionProps> = ({ openDialog, icon }) => {
             ))}
           </div>
           
-          <div className={`mt-5 p-4 ${tipBackgroundColor} rounded-lg ${tipBorderColor}`}>
-            <p className={`text-sm ${tipTextColor}`}>
+          <div className={`mt-4 md:mt-5 p-3 md:p-4 ${tipBackgroundColor} rounded-lg ${tipBorderColor}`}>
+            <p className={`text-xs md:text-sm ${tipTextColor}`}>
               <strong>Pro tip:</strong> Focus on being helpful first. Share personal experiences, practical tips, and real examples. Answers that feel authentic and include screenshots or GIFs get more upvotes and visibility.
             </p>
           </div>
         </div>
         
         {/* Step 2: Submit proof */}
-        <div className="bg-white p-5 rounded-xl border border-gray-100 shadow-sm">
-          <div className="flex items-center gap-2 mb-4 text-purple-600">
+        <div className="bg-white p-4 md:p-5 rounded-xl border border-gray-100 shadow-sm">
+          <div className="flex items-center gap-2 mb-3 md:mb-4 text-purple-600">
             <div className="flex items-center justify-center h-6 w-6 rounded-full bg-purple-100 text-sm font-medium">2</div>
-            <h3 className="font-medium">Submit proof to earn 4 credits</h3>
+            <h3 className="font-medium text-sm md:text-base">Submit proof to earn 4 credits</h3>
           </div>
           
           <div className="flex justify-center">
             <Button 
               onClick={openDialog}
-              className="bg-brand-purple hover:bg-brand-lightPurple text-white gap-2"
+              className="bg-brand-purple hover:bg-brand-lightPurple text-white gap-2 text-sm md:text-base py-2 px-4"
             >
               Submit your answer <Check className="h-4 w-4" />
             </Button>
