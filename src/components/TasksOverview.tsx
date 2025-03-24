@@ -90,7 +90,10 @@ const TasksOverview = () => {
             </div>
             <div className="text-xs font-medium">{task.title}</div>
             <Badge variant="outline" className="mt-1 bg-white/80 backdrop-blur-sm text-xs px-2 py-0 animate-pulse-soft">
-              {task.credits} credits
+              {task.credits} credits per {task.title.toLowerCase().includes('q&a') ? 'answer' : 
+                task.title.toLowerCase().includes('social') ? 'share' : 
+                task.title.toLowerCase().includes('video') ? 'tutorial' : 
+                task.title.toLowerCase().replace('blog ', '').toLowerCase()}
             </Badge>
           </div>
         ))}
