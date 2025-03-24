@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import Header from '../../components/Header';
 import Sidebar from '../../components/Sidebar';
@@ -8,6 +7,7 @@ import { Review } from '../../types/reward';
 import { toast } from '@/hooks/use-toast';
 import RewardsDialogs from './RewardsDialogs';
 import RewardsSections from './RewardsSections';
+import TasksOverview from '../../components/TasksOverview';
 import { Button } from '@/components/ui/button';
 import { Play, Menu } from 'lucide-react';
 import { useIsMobile } from '@/hooks/use-mobile';
@@ -99,6 +99,8 @@ const RewardsPage = () => {
               </Button>
             </div>
           </div>
+          
+          <TasksOverview />
           
           <RewardsSections openDialog={rewardDialogs.openDialog} />
           
