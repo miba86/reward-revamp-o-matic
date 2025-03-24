@@ -8,6 +8,7 @@ interface TaskItem {
   credits: number;
   icon: React.ReactNode;
   color: string;
+  sectionId: string;
 }
 
 const TasksOverview = () => {
@@ -16,33 +17,48 @@ const TasksOverview = () => {
       title: 'Social Share',
       credits: 3,
       icon: <Share2 className="h-4 w-4" />,
-      color: 'bg-blue-100 text-blue-600'
+      color: 'bg-blue-100 text-blue-600',
+      sectionId: 'social-share-section'
     },
     {
       title: 'Review',
       credits: 5,
       icon: <Sparkles className="h-4 w-4" />,
-      color: 'bg-amber-100 text-amber-600'
+      color: 'bg-amber-100 text-amber-600',
+      sectionId: 'review-section'
     },
     {
       title: 'Blog Post',
       credits: 8,
       icon: <Book className="h-4 w-4" />,
-      color: 'bg-green-100 text-green-600'
+      color: 'bg-green-100 text-green-600',
+      sectionId: 'blog-section'
     },
     {
       title: 'Video Tutorial',
       credits: 10,
       icon: <Youtube className="h-4 w-4" />,
-      color: 'bg-red-100 text-red-600'
+      color: 'bg-red-100 text-red-600',
+      sectionId: 'video-section'
     },
     {
       title: 'Q&A Answer',
       credits: 4,
       icon: <HelpCircle className="h-4 w-4" />,
-      color: 'bg-purple-100 text-purple-600'
+      color: 'bg-purple-100 text-purple-600',
+      sectionId: 'qa-section'
     }
   ];
+
+  const scrollToSection = (sectionId: string) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start'
+      });
+    }
+  };
 
   return (
     <div className="bg-white rounded-xl p-4 mb-6 border border-gray-100 shadow-sm">
@@ -51,7 +67,10 @@ const TasksOverview = () => {
         {tasks.map((task, index) => (
           <div 
             key={index} 
-            className={`${task.color} rounded-lg p-3 flex flex-col items-center justify-center text-center transition-transform hover:scale-105`}
+            className={`${task.color} rounded-lg p-3 flex flex-col items-center justify-center text-center transition-transform hover:scale-105 cursor-pointer`}
+            onClick={() => scrollToSection(task.sectionId)}
+            role="button"
+            aria-label={`View ${task.title} task details`}
           >
             <div className="flex items-center justify-center mb-1">
               {task.icon}
