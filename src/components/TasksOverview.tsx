@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Share2, Sparkles, Book, Youtube, HelpCircle } from 'lucide-react';
+import { Share2, Sparkles, Book, Youtube, HelpCircle, Award } from 'lucide-react';
 import { Badge } from './ui/badge';
 
 interface TaskItem {
@@ -50,6 +50,9 @@ const TasksOverview = () => {
     }
   ];
 
+  // Calculate total possible credits
+  const totalCredits = tasks.reduce((sum, task) => sum + task.credits, 0);
+
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
     if (element) {
@@ -61,13 +64,23 @@ const TasksOverview = () => {
   };
 
   return (
-    <div className="bg-white rounded-xl p-4 mb-6 border border-gray-100 shadow-sm">
-      <h3 className="text-sm font-medium mb-3">Available Tasks - Quick Overview</h3>
+    <div className="bg-white rounded-xl p-4 mb-6 border border-gray-100 shadow-sm relative overflow-hidden">
+      {/* Background pattern for gamified look */}
+      <div className="absolute inset-0 opacity-5 bg-[radial-gradient(#4f46e5_1px,transparent_1px)] [background-size:16px_16px] pointer-events-none"></div>
+      
+      <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-4">
+        <h3 className="text-sm font-medium">Available Tasks - Quick Overview</h3>
+        <div className="flex items-center mt-2 md:mt-0 bg-indigo-50 rounded-full px-3 py-1 text-indigo-700">
+          <Award className="h-4 w-4 mr-1 text-indigo-500" />
+          <span className="text-xs font-semibold">Total Available: {totalCredits} Credits</span>
+        </div>
+      </div>
+      
       <div className="grid grid-cols-2 md:grid-cols-5 gap-2">
         {tasks.map((task, index) => (
           <div 
             key={index} 
-            className={`${task.color} rounded-lg p-3 flex flex-col items-center justify-center text-center transition-transform hover:scale-105 cursor-pointer`}
+            className={`${task.color} rounded-lg p-3 flex flex-col items-center justify-center text-center transition-all duration-200 hover:scale-105 hover:shadow-md cursor-pointer border border-transparent hover:border-opacity-50 hover:border-current`}
             onClick={() => scrollToSection(task.sectionId)}
             role="button"
             aria-label={`View ${task.title} task details`}
@@ -76,7 +89,7 @@ const TasksOverview = () => {
               {task.icon}
             </div>
             <div className="text-xs font-medium">{task.title}</div>
-            <Badge variant="outline" className="mt-1 bg-white text-xs px-2 py-0">
+            <Badge variant="outline" className="mt-1 bg-white/80 backdrop-blur-sm text-xs px-2 py-0 animate-pulse-soft">
               {task.credits} credits
             </Badge>
           </div>
