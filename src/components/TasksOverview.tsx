@@ -2,32 +2,30 @@
 import React from 'react';
 import { Share2, Sparkles, Book, Youtube, HelpCircle, Award } from 'lucide-react';
 import { Box, Typography, Grid, Paper } from '@mui/material';
-import styled from "@emotion/styled";
+import { styled } from '@mui/material/styles';
 import { Badge } from './ui/badge';
 
 // Custom components to replace Tailwind styling
-const Flex = styled(Box)<{ direction?: string }>(({ direction = 'row', ...props }) => ({
+const Flex = styled(Box)({
   display: 'flex',
-  flexDirection: direction as any,
-  ...props
-}));
+});
 
-const BadgeStyled = styled(Badge)(() => ({
+const BadgeStyled = styled(Badge)({
   marginTop: '4px',
   backgroundColor: 'rgba(255, 255, 255, 0.8)',
   backdropFilter: 'blur(4px)',
   fontSize: '0.75rem',
   padding: '0 8px',
-  animation: 'pulse 2s infinite',
   '@keyframes pulse': {
     '0%': { opacity: 0.7 },
     '50%': { opacity: 1 },
     '100%': { opacity: 0.7 },
-  }
-}));
+  },
+  animation: 'pulse 2s infinite',
+});
 
 // Main container styling
-const TaskContainer = styled(Paper)(() => ({
+const TaskContainer = styled(Paper)({
   padding: '16px',
   marginBottom: '24px',
   borderRadius: '16px',
@@ -35,12 +33,15 @@ const TaskContainer = styled(Paper)(() => ({
   boxShadow: '0 1px 3px rgba(0, 0, 0, 0.1)',
   position: 'relative',
   overflow: 'hidden',
-}));
+});
 
 // Background pattern styling
 const BackgroundPattern = styled(Box)({
   position: 'absolute',
-  inset: 0,
+  top: 0,
+  right: 0,
+  bottom: 0,
+  left: 0,
   opacity: 0.05,
   backgroundImage: 'radial-gradient(#4f46e5 1px, transparent 1px)',
   backgroundSize: '16px 16px',
@@ -48,7 +49,7 @@ const BackgroundPattern = styled(Box)({
 });
 
 // Task item styling
-const TaskItem = styled(Box)<{ bgcolor?: string }>(({ bgcolor }) => ({
+const TaskItem = styled(Box)(({ bgcolor }: { bgcolor?: string }) => ({
   borderRadius: '8px',
   padding: '12px',
   display: 'flex',
@@ -68,14 +69,14 @@ const TaskItem = styled(Box)<{ bgcolor?: string }>(({ bgcolor }) => ({
 }));
 
 // Award container styling
-const AwardContainer = styled(Box)(() => ({
+const AwardContainer = styled(Box)({
   display: 'flex',
   alignItems: 'center',
   backgroundColor: '#eef2ff',
   borderRadius: '9999px',
   padding: '4px 12px',
   color: '#4f46e5'
-}));
+});
 
 interface TaskItemType {
   title: string;
@@ -148,7 +149,7 @@ const TasksOverview = () => {
       {/* Background pattern for gamified look */}
       <BackgroundPattern />
       
-      <Flex justifyContent="space-between" alignItems="center" sx={{ mb: 2, flexDirection: { xs: 'column', md: 'row' }, alignItems: { xs: 'flex-start', md: 'center' } }}>
+      <Flex sx={{ justifyContent: "space-between", alignItems: { xs: 'flex-start', md: 'center' }, mb: 2, flexDirection: { xs: 'column', md: 'row' } }}>
         <Typography variant="body2" fontWeight="medium">Available Tasks - Quick Overview</Typography>
         <AwardContainer sx={{ mt: { xs: 1, md: 0 } }}>
           <Award style={{ height: 16, width: 16, marginRight: 4, color: '#4f46e5' }} />
@@ -158,7 +159,7 @@ const TasksOverview = () => {
       
       <Grid container spacing={1}>
         {tasks.map((task, index) => (
-          <Grid key={index} xs={6} md={2.4}>
+          <Grid item xs={6} md={2.4} key={index}>
             <TaskItem 
               onClick={() => scrollToSection(task.sectionId)}
               role="button"
@@ -166,17 +167,17 @@ const TasksOverview = () => {
               bgcolor={task.bgcolor}
               sx={{ color: task.color }}
             >
-              <Flex alignItems="center" justifyContent="center" sx={{ mb: 0.5 }}>
+              <Flex sx={{ alignItems: "center", justifyContent: "center", mb: 0.5 }}>
                 {task.icon}
               </Flex>
               <Typography variant="caption" fontWeight="medium">{task.title}</Typography>
-              <BadgeStyled variant="outline" sx={{ bgcolor: 'rgba(255, 255, 255, 0.8)' }}>
-                {task.credits} credits /{task.title.toLowerCase().includes('q&a') ? 'answer' : 
-                  task.title.toLowerCase().includes('social') ? 'share' : 
-                  task.title.toLowerCase().includes('video') ? 'tutorial' : 
-                  task.title.toLowerCase().includes('blog') ? 'post' : 
-                  task.title.toLowerCase().replace('blog ', '').toLowerCase()}
-              </BadgeStyled>
+              <BadgeStyled label={`${task.credits} credits /${
+                task.title.toLowerCase().includes('q&a') ? 'answer' : 
+                task.title.toLowerCase().includes('social') ? 'share' : 
+                task.title.toLowerCase().includes('video') ? 'tutorial' : 
+                task.title.toLowerCase().includes('blog') ? 'post' : 
+                task.title.toLowerCase().replace('blog ', '').toLowerCase()
+              }`} variant="outline" sx={{ bgcolor: 'rgba(255, 255, 255, 0.8)' }} />
             </TaskItem>
           </Grid>
         ))}

@@ -10,32 +10,23 @@ interface BadgeProps extends Omit<ChipProps, "variant"> {
 }
 
 // Create a styled Chip component that matches our Badge styling
-const StyledChip = styled(Chip)<BadgeProps>(({ theme, variant = "default" }) => {
+const StyledChip = styled(Chip)(({ theme, variant = "default" }) => {
   // Map our custom variants to styling
-  const styles = {
+  const styles: Record<BadgeVariant, React.CSSProperties> = {
     default: {
       backgroundColor: "#9b87f5",
       color: "#ffffff",
       border: "transparent",
-      "&:hover": {
-        backgroundColor: "#7E69AB",
-      },
     },
     secondary: {
       backgroundColor: "#7E69AB",
       color: "#ffffff",
       border: "transparent",
-      "&:hover": {
-        backgroundColor: "#6a5a91",
-      },
     },
     destructive: {
       backgroundColor: "#ea384c",
       color: "#ffffff",
       border: "transparent",
-      "&:hover": {
-        backgroundColor: "#d3303f",
-      },
     },
     outline: {
       backgroundColor: "transparent",
@@ -44,7 +35,7 @@ const StyledChip = styled(Chip)<BadgeProps>(({ theme, variant = "default" }) => 
     },
   };
 
-  return styles[variant];
+  return styles[variant as BadgeVariant];
 });
 
 export function Badge({ 
