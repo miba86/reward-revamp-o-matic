@@ -1,6 +1,6 @@
 
 import * as React from "react";
-import { styled } from "@emotion/styled";
+import styled from "@emotion/styled";
 import { Chip, ChipProps } from "@mui/material";
 
 type BadgeVariant = "default" | "secondary" | "destructive" | "outline";

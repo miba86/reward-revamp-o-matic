@@ -2,13 +2,13 @@
 import React from 'react';
 import { Share2, Sparkles, Book, Youtube, HelpCircle, Award } from 'lucide-react';
 import { Box, Typography, Grid, Paper } from '@mui/material';
-import { styled } from '@emotion/styled';
+import styled from "@emotion/styled";
 import { Badge } from './ui/badge';
 
 // Custom components to replace Tailwind styling
 const Flex = styled(Box)<{ direction?: string }>(({ direction = 'row', ...props }) => ({
   display: 'flex',
-  flexDirection: direction,
+  flexDirection: direction as any,
   ...props
 }));
 
@@ -158,7 +158,7 @@ const TasksOverview = () => {
       
       <Grid container spacing={1}>
         {tasks.map((task, index) => (
-          <Grid item xs={6} md={2.4} key={index}>
+          <Grid key={index} xs={6} md={2.4}>
             <TaskItem 
               onClick={() => scrollToSection(task.sectionId)}
               role="button"
