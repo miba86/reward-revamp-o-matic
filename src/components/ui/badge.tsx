@@ -1,6 +1,6 @@
 
 import * as React from "react";
-import { styled } from "@mui/material/styles";
+import { styled } from "@emotion/styled";
 import { Chip, ChipProps } from "@mui/material";
 
 type BadgeVariant = "default" | "secondary" | "destructive" | "outline";
@@ -10,39 +10,37 @@ interface BadgeProps extends Omit<ChipProps, "variant"> {
 }
 
 // Create a styled Chip component that matches our Badge styling
-const BadgeComponent = styled(Chip, {
-  shouldForwardProp: (prop) => prop !== "variant"
-})<BadgeProps>(({ theme, variant = "default" }) => {
-  // Map our custom variants to MUI styling
+const StyledChip = styled(Chip)<BadgeProps>(({ theme, variant = "default" }) => {
+  // Map our custom variants to styling
   const styles = {
     default: {
-      backgroundColor: theme.palette.primary.main,
-      color: theme.palette.primary.contrastText,
+      backgroundColor: "#9b87f5",
+      color: "#ffffff",
       border: "transparent",
       "&:hover": {
-        backgroundColor: theme.palette.primary.dark,
+        backgroundColor: "#7E69AB",
       },
     },
     secondary: {
-      backgroundColor: theme.palette.secondary.main,
-      color: theme.palette.secondary.contrastText,
+      backgroundColor: "#7E69AB",
+      color: "#ffffff",
       border: "transparent",
       "&:hover": {
-        backgroundColor: theme.palette.secondary.dark,
+        backgroundColor: "#6a5a91",
       },
     },
     destructive: {
-      backgroundColor: theme.palette.error.main,
-      color: theme.palette.error.contrastText,
+      backgroundColor: "#ea384c",
+      color: "#ffffff",
       border: "transparent",
       "&:hover": {
-        backgroundColor: theme.palette.error.dark,
+        backgroundColor: "#d3303f",
       },
     },
     outline: {
       backgroundColor: "transparent",
-      color: theme.palette.text.primary,
-      border: `1px solid ${theme.palette.divider}`,
+      color: "#1A1F2C",
+      border: "1px solid #e2e8f0",
     },
   };
 
@@ -55,7 +53,7 @@ export function Badge({
   ...props 
 }: BadgeProps) {
   return (
-    <BadgeComponent
+    <StyledChip
       size="small"
       variant={variant === "outline" ? "outlined" : "filled"}
       {...props}
@@ -63,5 +61,3 @@ export function Badge({
     />
   );
 }
-
-export { Badge };

@@ -2,17 +2,17 @@
 import React from 'react';
 import { Share2, Sparkles, Book, Youtube, HelpCircle, Award } from 'lucide-react';
 import { Box, Typography, Grid, Paper } from '@mui/material';
-import { styled } from '@mui/material/styles';
+import { styled } from '@emotion/styled';
 import { Badge } from './ui/badge';
 
 // Custom components to replace Tailwind styling
-const Flex = styled(Box)(({ direction = 'row', ...props }) => ({
+const Flex = styled(Box)<{ direction?: string }>(({ direction = 'row', ...props }) => ({
   display: 'flex',
   flexDirection: direction,
   ...props
 }));
 
-const BadgeStyled = styled(Badge)(({ variant, color }) => ({
+const BadgeStyled = styled(Badge)(() => ({
   marginTop: '4px',
   backgroundColor: 'rgba(255, 255, 255, 0.8)',
   backdropFilter: 'blur(4px)',
@@ -27,12 +27,12 @@ const BadgeStyled = styled(Badge)(({ variant, color }) => ({
 }));
 
 // Main container styling
-const TaskContainer = styled(Paper)(({ theme }) => ({
-  padding: theme.spacing(2),
-  marginBottom: theme.spacing(3),
-  borderRadius: theme.shape.borderRadius * 2,
-  border: `1px solid ${theme.palette.grey[100]}`,
-  boxShadow: theme.shadows[1],
+const TaskContainer = styled(Paper)(() => ({
+  padding: '16px',
+  marginBottom: '24px',
+  borderRadius: '16px',
+  border: '1px solid #f1f5f9',
+  boxShadow: '0 1px 3px rgba(0, 0, 0, 0.1)',
   position: 'relative',
   overflow: 'hidden',
 }));
@@ -48,7 +48,7 @@ const BackgroundPattern = styled(Box)({
 });
 
 // Task item styling
-const TaskItem = styled(Box)(({ bgcolor }) => ({
+const TaskItem = styled(Box)<{ bgcolor?: string }>(({ bgcolor }) => ({
   borderRadius: '8px',
   padding: '12px',
   display: 'flex',
@@ -68,13 +68,13 @@ const TaskItem = styled(Box)(({ bgcolor }) => ({
 }));
 
 // Award container styling
-const AwardContainer = styled(Box)(({ theme }) => ({
+const AwardContainer = styled(Box)(() => ({
   display: 'flex',
   alignItems: 'center',
-  backgroundColor: theme.palette.indigo.light || '#eef2ff',
+  backgroundColor: '#eef2ff',
   borderRadius: '9999px',
   padding: '4px 12px',
-  color: theme.palette.indigo.main || '#4f46e5',
+  color: '#4f46e5'
 }));
 
 interface TaskItemType {
@@ -148,9 +148,9 @@ const TasksOverview = () => {
       {/* Background pattern for gamified look */}
       <BackgroundPattern />
       
-      <Flex justifyContent="space-between" alignItems={{ xs: 'flex-start', md: 'center' }} mb={2}>
+      <Flex justifyContent="space-between" alignItems="center" sx={{ mb: 2, flexDirection: { xs: 'column', md: 'row' }, alignItems: { xs: 'flex-start', md: 'center' } }}>
         <Typography variant="body2" fontWeight="medium">Available Tasks - Quick Overview</Typography>
-        <AwardContainer mt={{ xs: 1, md: 0 }}>
+        <AwardContainer sx={{ mt: { xs: 1, md: 0 } }}>
           <Award style={{ height: 16, width: 16, marginRight: 4, color: '#4f46e5' }} />
           <Typography variant="caption" fontWeight="bold">Total Available: {totalCredits} Credits</Typography>
         </AwardContainer>
@@ -166,7 +166,7 @@ const TasksOverview = () => {
               bgcolor={task.bgcolor}
               sx={{ color: task.color }}
             >
-              <Flex alignItems="center" justifyContent="center" mb={0.5}>
+              <Flex alignItems="center" justifyContent="center" sx={{ mb: 0.5 }}>
                 {task.icon}
               </Flex>
               <Typography variant="caption" fontWeight="medium">{task.title}</Typography>
