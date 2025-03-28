@@ -1,36 +1,67 @@
-import * as React from "react"
-import { cva, type VariantProps } from "class-variance-authority"
 
-import { cn } from "@/lib/utils"
+import * as React from "react";
+import { styled } from "@mui/material/styles";
+import { Chip, ChipProps } from "@mui/material";
 
-const badgeVariants = cva(
-  "inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2",
-  {
-    variants: {
-      variant: {
-        default:
-          "border-transparent bg-primary text-primary-foreground hover:bg-primary/80",
-        secondary:
-          "border-transparent bg-secondary text-secondary-foreground hover:bg-secondary/80",
-        destructive:
-          "border-transparent bg-destructive text-destructive-foreground hover:bg-destructive/80",
-        outline: "text-foreground",
-      },
-    },
-    defaultVariants: {
-      variant: "default",
-    },
-  }
-)
+type BadgeVariant = "default" | "secondary" | "destructive" | "outline";
 
-export interface BadgeProps
-  extends React.HTMLAttributes<HTMLDivElement>,
-    VariantProps<typeof badgeVariants> {}
-
-function Badge({ className, variant, ...props }: BadgeProps) {
-  return (
-    <div className={cn(badgeVariants({ variant }), className)} {...props} />
-  )
+interface BadgeProps extends Omit<ChipProps, "variant"> {
+  variant?: BadgeVariant;
 }
 
-export { Badge, badgeVariants }
+// Create a styled Chip component that matches our Badge styling
+const BadgeComponent = styled(Chip, {
+  shouldForwardProp: (prop) => prop !== "variant"
+})<BadgeProps>(({ theme, variant = "default" }) => {
+  // Map our custom variants to MUI styling
+  const styles = {
+    default: {
+      backgroundColor: theme.palette.primary.main,
+      color: theme.palette.primary.contrastText,
+      border: "transparent",
+      "&:hover": {
+        backgroundColor: theme.palette.primary.dark,
+      },
+    },
+    secondary: {
+      backgroundColor: theme.palette.secondary.main,
+      color: theme.palette.secondary.contrastText,
+      border: "transparent",
+      "&:hover": {
+        backgroundColor: theme.palette.secondary.dark,
+      },
+    },
+    destructive: {
+      backgroundColor: theme.palette.error.main,
+      color: theme.palette.error.contrastText,
+      border: "transparent",
+      "&:hover": {
+        backgroundColor: theme.palette.error.dark,
+      },
+    },
+    outline: {
+      backgroundColor: "transparent",
+      color: theme.palette.text.primary,
+      border: `1px solid ${theme.palette.divider}`,
+    },
+  };
+
+  return styles[variant];
+});
+
+export function Badge({ 
+  className, 
+  variant = "default", 
+  ...props 
+}: BadgeProps) {
+  return (
+    <BadgeComponent
+      size="small"
+      variant={variant === "outline" ? "outlined" : "filled"}
+      {...props}
+      className={className}
+    />
+  );
+}
+
+export { Badge };

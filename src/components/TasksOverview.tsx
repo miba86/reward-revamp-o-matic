@@ -1,51 +1,131 @@
 
 import React from 'react';
 import { Share2, Sparkles, Book, Youtube, HelpCircle, Award } from 'lucide-react';
+import { Box, Typography, Grid, Paper } from '@mui/material';
+import { styled } from '@mui/material/styles';
 import { Badge } from './ui/badge';
 
-interface TaskItem {
+// Custom components to replace Tailwind styling
+const Flex = styled(Box)(({ direction = 'row', ...props }) => ({
+  display: 'flex',
+  flexDirection: direction,
+  ...props
+}));
+
+const BadgeStyled = styled(Badge)(({ variant, color }) => ({
+  marginTop: '4px',
+  backgroundColor: 'rgba(255, 255, 255, 0.8)',
+  backdropFilter: 'blur(4px)',
+  fontSize: '0.75rem',
+  padding: '0 8px',
+  animation: 'pulse 2s infinite',
+  '@keyframes pulse': {
+    '0%': { opacity: 0.7 },
+    '50%': { opacity: 1 },
+    '100%': { opacity: 0.7 },
+  }
+}));
+
+// Main container styling
+const TaskContainer = styled(Paper)(({ theme }) => ({
+  padding: theme.spacing(2),
+  marginBottom: theme.spacing(3),
+  borderRadius: theme.shape.borderRadius * 2,
+  border: `1px solid ${theme.palette.grey[100]}`,
+  boxShadow: theme.shadows[1],
+  position: 'relative',
+  overflow: 'hidden',
+}));
+
+// Background pattern styling
+const BackgroundPattern = styled(Box)({
+  position: 'absolute',
+  inset: 0,
+  opacity: 0.05,
+  backgroundImage: 'radial-gradient(#4f46e5 1px, transparent 1px)',
+  backgroundSize: '16px 16px',
+  pointerEvents: 'none',
+});
+
+// Task item styling
+const TaskItem = styled(Box)(({ bgcolor }) => ({
+  borderRadius: '8px',
+  padding: '12px',
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
+  justifyContent: 'center',
+  textAlign: 'center',
+  transition: 'all 0.2s',
+  backgroundColor: bgcolor,
+  cursor: 'pointer',
+  border: '1px solid transparent',
+  '&:hover': {
+    transform: 'scale(1.05)',
+    boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)',
+    borderColor: 'rgba(0, 0, 0, 0.1)',
+  }
+}));
+
+// Award container styling
+const AwardContainer = styled(Box)(({ theme }) => ({
+  display: 'flex',
+  alignItems: 'center',
+  backgroundColor: theme.palette.indigo.light || '#eef2ff',
+  borderRadius: '9999px',
+  padding: '4px 12px',
+  color: theme.palette.indigo.main || '#4f46e5',
+}));
+
+interface TaskItemType {
   title: string;
   credits: number;
   icon: React.ReactNode;
   color: string;
+  bgcolor: string;
   sectionId: string;
 }
 
 const TasksOverview = () => {
-  const tasks: TaskItem[] = [
+  const tasks: TaskItemType[] = [
     {
       title: 'Social Share',
       credits: 3,
-      icon: <Share2 className="h-4 w-4" />,
-      color: 'bg-blue-100 text-blue-600',
+      icon: <Share2 style={{ height: 16, width: 16 }} />,
+      color: '#3b82f6',
+      bgcolor: '#dbeafe',
       sectionId: 'social-share-section'
     },
     {
       title: 'Review',
       credits: 5,
-      icon: <Sparkles className="h-4 w-4" />,
-      color: 'bg-amber-100 text-amber-600',
+      icon: <Sparkles style={{ height: 16, width: 16 }} />,
+      color: '#d97706',
+      bgcolor: '#fef3c7',
       sectionId: 'review-section'
     },
     {
       title: 'Blog Post',
       credits: 8,
-      icon: <Book className="h-4 w-4" />,
-      color: 'bg-green-100 text-green-600',
+      icon: <Book style={{ height: 16, width: 16 }} />,
+      color: '#059669',
+      bgcolor: '#d1fae5',
       sectionId: 'blog-section'
     },
     {
       title: 'Video Tutorial',
       credits: 10,
-      icon: <Youtube className="h-4 w-4" />,
-      color: 'bg-red-100 text-red-600',
+      icon: <Youtube style={{ height: 16, width: 16 }} />,
+      color: '#dc2626',
+      bgcolor: '#fee2e2',
       sectionId: 'video-section'
     },
     {
       title: 'Q&A Answer',
       credits: 4,
-      icon: <HelpCircle className="h-4 w-4" />,
-      color: 'bg-purple-100 text-purple-600',
+      icon: <HelpCircle style={{ height: 16, width: 16 }} />,
+      color: '#7c3aed',
+      bgcolor: '#ede9fe',
       sectionId: 'qa-section'
     }
   ];
@@ -64,44 +144,45 @@ const TasksOverview = () => {
   };
 
   return (
-    <div className="bg-white rounded-xl p-4 mb-6 border border-gray-100 shadow-sm relative overflow-hidden">
+    <TaskContainer>
       {/* Background pattern for gamified look */}
-      <div className="absolute inset-0 opacity-5 bg-[radial-gradient(#4f46e5_1px,transparent_1px)] [background-size:16px_16px] pointer-events-none"></div>
+      <BackgroundPattern />
       
-      <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-4">
-        <h3 className="text-sm font-medium">Available Tasks - Quick Overview</h3>
-        <div className="flex items-center mt-2 md:mt-0 bg-indigo-50 rounded-full px-3 py-1 text-indigo-700">
-          <Award className="h-4 w-4 mr-1 text-indigo-500" />
-          <span className="text-xs font-semibold">Total Available: {totalCredits} Credits</span>
-        </div>
-      </div>
+      <Flex justifyContent="space-between" alignItems={{ xs: 'flex-start', md: 'center' }} mb={2}>
+        <Typography variant="body2" fontWeight="medium">Available Tasks - Quick Overview</Typography>
+        <AwardContainer mt={{ xs: 1, md: 0 }}>
+          <Award style={{ height: 16, width: 16, marginRight: 4, color: '#4f46e5' }} />
+          <Typography variant="caption" fontWeight="bold">Total Available: {totalCredits} Credits</Typography>
+        </AwardContainer>
+      </Flex>
       
-      <div className="grid grid-cols-2 md:grid-cols-5 gap-2">
+      <Grid container spacing={1}>
         {tasks.map((task, index) => (
-          <div 
-            key={index} 
-            className={`${task.color} rounded-lg p-3 flex flex-col items-center justify-center text-center transition-all duration-200 hover:scale-105 hover:shadow-md cursor-pointer border border-transparent hover:border-opacity-50 hover:border-current`}
-            onClick={() => scrollToSection(task.sectionId)}
-            role="button"
-            aria-label={`View ${task.title} task details`}
-          >
-            <div className="flex items-center justify-center mb-1">
-              {task.icon}
-            </div>
-            <div className="text-xs font-medium">{task.title}</div>
-            <Badge variant="outline" className="mt-1 bg-white/80 backdrop-blur-sm text-xs px-2 py-0 animate-pulse-soft">
-              {task.credits} credits /{task.title.toLowerCase().includes('q&a') ? 'answer' : 
-                task.title.toLowerCase().includes('social') ? 'share' : 
-                task.title.toLowerCase().includes('video') ? 'tutorial' : 
-                task.title.toLowerCase().includes('blog') ? 'post' : 
-                task.title.toLowerCase().replace('blog ', '').toLowerCase()}
-            </Badge>
-          </div>
+          <Grid item xs={6} md={2.4} key={index}>
+            <TaskItem 
+              onClick={() => scrollToSection(task.sectionId)}
+              role="button"
+              aria-label={`View ${task.title} task details`}
+              bgcolor={task.bgcolor}
+              sx={{ color: task.color }}
+            >
+              <Flex alignItems="center" justifyContent="center" mb={0.5}>
+                {task.icon}
+              </Flex>
+              <Typography variant="caption" fontWeight="medium">{task.title}</Typography>
+              <BadgeStyled variant="outline" sx={{ bgcolor: 'rgba(255, 255, 255, 0.8)' }}>
+                {task.credits} credits /{task.title.toLowerCase().includes('q&a') ? 'answer' : 
+                  task.title.toLowerCase().includes('social') ? 'share' : 
+                  task.title.toLowerCase().includes('video') ? 'tutorial' : 
+                  task.title.toLowerCase().includes('blog') ? 'post' : 
+                  task.title.toLowerCase().replace('blog ', '').toLowerCase()}
+              </BadgeStyled>
+            </TaskItem>
+          </Grid>
         ))}
-      </div>
-    </div>
+      </Grid>
+    </TaskContainer>
   );
 };
 
 export default TasksOverview;
-
